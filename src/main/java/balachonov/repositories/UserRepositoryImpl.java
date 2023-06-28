@@ -16,9 +16,6 @@ import static balachonov.util.Constants.*;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private final UserMapper USER_MAPPER = new UserMapper();
-
-
     @Override
     public User adminCreate(User user) {
         try (Connection connection = ConnectionManager.open()) {
@@ -31,6 +28,7 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(6, user.getSalt());
             statement.setString(7, user.getUserRole().getTitle());
             statement.execute();
+            user.setIdUser(getUserId(user));
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,6 +47,7 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(5, user.getPassword());
             statement.setString(6, user.getSalt());
             statement.execute();
+            user.setIdUser(getUserId(user));
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,15 +62,15 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(1, idUser);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                User user = USER_MAPPER.buildUserForGetUserById(
-                        resultSet.getString(SQL_ID_USER),
-                        resultSet.getString(SQL_FIRST_NAME),
-                        resultSet.getString(SQL_LAST_NAME),
-                        resultSet.getString(SQL_EMAIL),
-                        resultSet.getString(SQL_ADDRESS),
-                        resultSet.getString(SQL_PASSWORD),
-                        resultSet.getString(SQL_SALT),
-                        resultSet.getString(SQL_USER_ROLE)
+                User user = UserMapper.getUserMapper().buildUserWithId(
+                        resultSet.getString(ID_USER),
+                        resultSet.getString(USER_FIRST_NAME),
+                        resultSet.getString(USER_LAST_NAME),
+                        resultSet.getString(USER_EMAIL),
+                        resultSet.getString(USER_ADDRESS),
+                        resultSet.getString(USER_PASSWORD),
+                        resultSet.getString(USER_SALT),
+                        resultSet.getString(USER_ROLE)
                 );
                 return Optional.of(user);
             }
@@ -88,15 +87,15 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                User user = USER_MAPPER.buildUserForGetUserById(
-                        resultSet.getString(SQL_ID_USER),
-                        resultSet.getString(SQL_FIRST_NAME),
-                        resultSet.getString(SQL_LAST_NAME),
-                        resultSet.getString(SQL_EMAIL),
-                        resultSet.getString(SQL_ADDRESS),
-                        resultSet.getString(SQL_PASSWORD),
-                        resultSet.getString(SQL_SALT),
-                        resultSet.getString(SQL_USER_ROLE)
+                User user = UserMapper.getUserMapper().buildUserWithId(
+                        resultSet.getString(ID_USER),
+                        resultSet.getString(USER_FIRST_NAME),
+                        resultSet.getString(USER_LAST_NAME),
+                        resultSet.getString(USER_EMAIL),
+                        resultSet.getString(USER_ADDRESS),
+                        resultSet.getString(USER_PASSWORD),
+                        resultSet.getString(USER_SALT),
+                        resultSet.getString(USER_ROLE)
                 );
                 return Optional.of(user);
             }
@@ -124,6 +123,7 @@ public class UserRepositoryImpl implements UserRepository {
                 update.setString(7, user.getUserRole().getTitle());
                 update.setString(8, userId);
                 update.execute();
+                user.setIdUser(getUserId(user));
                 return Optional.of(user);
             }
         } catch (SQLException e) {
@@ -139,15 +139,15 @@ public class UserRepositoryImpl implements UserRepository {
             PreparedStatement statement = connection.prepareStatement(SQL_GET_ALL_USER);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                User user = USER_MAPPER.buildUserForGetUserById(
-                        resultSet.getString(SQL_ID_USER),
-                        resultSet.getString(SQL_FIRST_NAME),
-                        resultSet.getString(SQL_LAST_NAME),
-                        resultSet.getString(SQL_EMAIL),
-                        resultSet.getString(SQL_ADDRESS),
-                        resultSet.getString(SQL_PASSWORD),
-                        resultSet.getString(SQL_SALT),
-                        resultSet.getString(SQL_USER_ROLE)
+                User user = UserMapper.getUserMapper().buildUserWithId(
+                        resultSet.getString(ID_USER),
+                        resultSet.getString(USER_FIRST_NAME),
+                        resultSet.getString(USER_LAST_NAME),
+                        resultSet.getString(USER_EMAIL),
+                        resultSet.getString(USER_ADDRESS),
+                        resultSet.getString(USER_PASSWORD),
+                        resultSet.getString(USER_SALT),
+                        resultSet.getString(USER_ROLE)
                 );
                 users.add(user);
             }
@@ -172,5 +172,18 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (SQLException e) {
             throw new RuntimeException();
         }
+    }
+
+    private String getUserId(User user) {
+        try (Connection connection = ConnectionManager.open()) {
+            PreparedStatement statement = connection.prepareStatement(SQL_GET_USER_BY_EMAIL);
+            statement.setString(1, user.getEmail());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+            return resultSet.getString(ID_USER);}
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return USER;
     }
 }

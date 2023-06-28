@@ -6,15 +6,20 @@ import balachonov.services.PasswordGenerationAndCheck;
 import balachonov.services.PasswordGenerationAndCheckImpl;
 
 import static balachonov.entities.UserRole.*;
-import static balachonov.entities.UserRole.USER;
 
 public class UserMapper {
-    private final PasswordGenerationAndCheck GENERATION_PASSWORD = new PasswordGenerationAndCheckImpl();
-
+    private static UserMapper userMapper;
+    public static UserMapper getUserMapper() {
+        if (userMapper == null){
+            userMapper = new UserMapper();
+        }
+        return userMapper;
+    }
     public User adminBuildUser(String firstName, String lastName, String email, String address,
                                String inputPassword, String userRole) {
-        String salt = GENERATION_PASSWORD.generationSalt();
-        String password = GENERATION_PASSWORD.getHashPassword(inputPassword, salt);
+        String salt = PasswordGenerationAndCheckImpl.getPasswordGenerationAndCheck().generationSalt();
+        String password = PasswordGenerationAndCheckImpl.getPasswordGenerationAndCheck().
+                getHashPassword(inputPassword, salt);
         return User.builder()
                 .firstName(firstName)
                 .lastName(lastName)
@@ -26,8 +31,8 @@ public class UserMapper {
                 .build();
     }
 
-    public User buildUserForGetUserById(String idUser, String firstName, String lastName, String email, String address,
-                                        String password, String salt, String userRole) {
+    public User buildUserWithId(String idUser, String firstName, String lastName, String email, String address,
+                                String password, String salt, String userRole) {
 
         return User.builder()
                 .idUser(idUser)
@@ -43,8 +48,10 @@ public class UserMapper {
 
     public User simpleBuildUser(String firstName, String lastName, String email, String address,
                                 String inputPassword) {
-        String salt = GENERATION_PASSWORD.generationSalt();
-        String password = GENERATION_PASSWORD.getHashPassword(inputPassword, salt);
+        String salt = PasswordGenerationAndCheckImpl.getPasswordGenerationAndCheck().generationSalt();
+        String password = PasswordGenerationAndCheckImpl.getPasswordGenerationAndCheck().
+                getHashPassword(inputPassword, salt);
+        String userRole = USER.getTitle();
         return User.builder()
                 .firstName(firstName)
                 .lastName(lastName)
@@ -52,16 +59,19 @@ public class UserMapper {
                 .address(address)
                 .password(password)
                 .salt(salt)
+                .userRole(getRole(userRole))
                 .build();
     }
 
     private UserRole getRole(String role) {
-        if (role.equals(ADMIN.getTitle())) {
+        if (role.equalsIgnoreCase(ADMIN.getTitle())) {
             return UserRole.ADMIN;
-        } else if (role.equals(MANAGER.getTitle())) {
-            return MANAGER;
-        } else if (role.equals(COURIER.getTitle())) {
-            return COURIER;
-        } else return USER;
+        } else if (role.equalsIgnoreCase(MANAGER.getTitle())) {
+            return UserRole.MANAGER;
+        } else if (role.equalsIgnoreCase(COURIER.getTitle())) {
+            return UserRole.COURIER;
+        } else return UserRole.USER;
     }
+
+    private UserMapper(){}
 }

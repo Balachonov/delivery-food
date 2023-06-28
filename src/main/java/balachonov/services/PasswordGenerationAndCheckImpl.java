@@ -13,6 +13,14 @@ import java.util.Arrays;
 import static balachonov.util.Constants.*;
 
 public class PasswordGenerationAndCheckImpl implements PasswordGenerationAndCheck {
+    private static PasswordGenerationAndCheckImpl passwordGenerationAndCheck;
+
+    public static PasswordGenerationAndCheckImpl getPasswordGenerationAndCheck() {
+        if (passwordGenerationAndCheck == null) {
+            passwordGenerationAndCheck = new PasswordGenerationAndCheckImpl();
+        }
+        return passwordGenerationAndCheck;
+    }
 
     @Override
     public boolean checkPassword(String inputPassword, String password, String salt) {
@@ -49,5 +57,9 @@ public class PasswordGenerationAndCheckImpl implements PasswordGenerationAndChec
             e.printStackTrace();
         }
         return DEFAULT;
+    }
+
+    private PasswordGenerationAndCheckImpl() {
+
     }
 }

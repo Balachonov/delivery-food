@@ -15,7 +15,6 @@ import java.util.Optional;
 import static balachonov.util.Constants.*;
 
 public class FoodRepositoryImpl implements FoodRepository {
-    private final FoodMapper FOOD_MAPPER = new FoodMapper();
     @Override
     public Food create(Food food) {
         try (Connection connection = ConnectionManager.open()) {
@@ -27,6 +26,7 @@ public class FoodRepositoryImpl implements FoodRepository {
             statement.setString(5, food.getComposition());
             statement.setString(6, food.getFoodType().getTitle());
             statement.execute();
+            food.setIdFood(getFoodId(food));
             return food;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,14 +41,14 @@ public class FoodRepositoryImpl implements FoodRepository {
             statement.setString(1, idFood);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Food food = FOOD_MAPPER.buildFoodById(
-                        resultSet.getString(SQL_ID_FOOD),
-                        resultSet.getString(SQL_NAME),
-                        resultSet.getFloat(SQL_PRICE),
-                        resultSet.getFloat(SQL_WEIGHT),
-                        resultSet.getString(SQL_DESCRIPTION),
-                        resultSet.getString(SQL_COMPOSITION),
-                        resultSet.getString(SQL_FOOD_TYPE)
+                Food food = FoodMapper.getFoodMapper().buildFoodById(
+                        resultSet.getString(ID_FOOD),
+                        resultSet.getString(FOOD_SQL_NAME),
+                        resultSet.getFloat(FOOD_PRICE),
+                        resultSet.getFloat(FOOD_WEIGHT),
+                        resultSet.getString(FOOD_DESCRIPTION),
+                        resultSet.getString(FOOD_COMPOSITION),
+                        resultSet.getString(FOOD_TYPE)
                 );
                 return Optional.of(food);
             }
@@ -65,14 +65,14 @@ public class FoodRepositoryImpl implements FoodRepository {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Food food = FOOD_MAPPER.buildFoodById(
-                        resultSet.getString(SQL_ID_FOOD),
-                        resultSet.getString(SQL_NAME),
-                        resultSet.getFloat(SQL_PRICE),
-                        resultSet.getFloat(SQL_WEIGHT),
-                        resultSet.getString(SQL_DESCRIPTION),
-                        resultSet.getString(SQL_COMPOSITION),
-                        resultSet.getString(SQL_FOOD_TYPE)
+                Food food = FoodMapper.getFoodMapper().buildFoodById(
+                        resultSet.getString(ID_FOOD),
+                        resultSet.getString(FOOD_SQL_NAME),
+                        resultSet.getFloat(FOOD_PRICE),
+                        resultSet.getFloat(FOOD_WEIGHT),
+                        resultSet.getString(FOOD_DESCRIPTION),
+                        resultSet.getString(FOOD_COMPOSITION),
+                        resultSet.getString(FOOD_TYPE)
                 );
                 return Optional.of(food);
             }
@@ -99,6 +99,7 @@ public class FoodRepositoryImpl implements FoodRepository {
                 update.setString(6, food.getFoodType().getTitle());
                 update.setString(7, foodId);
                 update.execute();
+                food.setIdFood(getFoodId(food));
                 return Optional.of(food);
             }
         } catch (SQLException e) {
@@ -114,14 +115,14 @@ public class FoodRepositoryImpl implements FoodRepository {
             PreparedStatement statement = connection.prepareStatement(SQL_GET_ALL_FOOD);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Food food = FOOD_MAPPER.buildFoodById(
-                        resultSet.getString(SQL_ID_FOOD),
-                        resultSet.getString(SQL_NAME),
-                        resultSet.getFloat(SQL_PRICE),
-                        resultSet.getFloat(SQL_WEIGHT),
-                        resultSet.getString(SQL_DESCRIPTION),
-                        resultSet.getString(SQL_COMPOSITION),
-                        resultSet.getString(SQL_FOOD_TYPE)
+                Food food = FoodMapper.getFoodMapper().buildFoodById(
+                        resultSet.getString(ID_FOOD),
+                        resultSet.getString(FOOD_SQL_NAME),
+                        resultSet.getFloat(FOOD_PRICE),
+                        resultSet.getFloat(FOOD_WEIGHT),
+                        resultSet.getString(FOOD_DESCRIPTION),
+                        resultSet.getString(FOOD_COMPOSITION),
+                        resultSet.getString(FOOD_TYPE)
                 );
                 foods.add(food);
             }
@@ -146,5 +147,19 @@ public class FoodRepositoryImpl implements FoodRepository {
         } catch (SQLException e) {
             throw new RuntimeException();
         }
+    }
+
+    private String getFoodId(Food food) {
+        try (Connection connection = ConnectionManager.open()) {
+            PreparedStatement statement = connection.prepareStatement(SQL_GET_FOOD_BY_NAME);
+            statement.setString(1, food.getName());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString(ID_FOOD);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return FOOD;
     }
 }

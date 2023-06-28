@@ -1,7 +1,7 @@
 package balachonov.entities;
 
 public enum FoodType {
-    HOT ("hot"),
+    HOT("hot"),
     SNACK("snack"),
     COLD("cold"),
     DESSERT("dessert"),

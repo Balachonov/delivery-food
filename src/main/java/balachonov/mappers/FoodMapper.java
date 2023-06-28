@@ -6,6 +6,16 @@ import balachonov.entities.FoodType;
 import static balachonov.entities.FoodType.*;
 
 public class FoodMapper {
+
+    private static FoodMapper foodMapper;
+
+    public static FoodMapper getFoodMapper() {
+        if (foodMapper == null) {
+            foodMapper = new FoodMapper();
+        }
+        return foodMapper;
+    }
+
     public Food buildFood(String name, Float price, Float weight, String description, String composition,
                           String foodType) {
         return Food.builder()
@@ -42,4 +52,6 @@ public class FoodMapper {
             return DESSERT;
         } else return DRINK;
     }
+
+    private FoodMapper(){}
 }

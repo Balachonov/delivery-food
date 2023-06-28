@@ -7,9 +7,18 @@ import balachonov.repositories.UserRepositoryImpl;
 import java.util.List;
 import java.util.Optional;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
+    private static UserServiceImpl userServiceImpl;
 
     private final UserRepository USER_REPOSITORY = new UserRepositoryImpl();
+
+    public static UserServiceImpl getUserServiceImpl() {
+        if (userServiceImpl == null) {
+            userServiceImpl = new UserServiceImpl();
+        }
+        return userServiceImpl;
+    }
 
     @Override
     public User adminCreate(User user) {
@@ -44,5 +53,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public Optional<User> deleteUser(String id) {
         return USER_REPOSITORY.deleteUser(id);
+    }
+
+    private UserServiceImpl() {
     }
 }

@@ -8,7 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class FoodServiceImpl implements FoodService {
+    private static FoodServiceImpl foodServiceImpl;
     private final FoodRepository FOOD_REPOSITORY = new FoodRepositoryImpl();
+
+    public static FoodServiceImpl getFoodServiceImpl() {
+        if (foodServiceImpl == null) {
+            foodServiceImpl = new FoodServiceImpl();
+        }
+        return foodServiceImpl;
+    }
 
     @Override
     public Food create(Food food) {
@@ -38,5 +46,8 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public Optional<Food> deleteFood(String idFood) {
         return FOOD_REPOSITORY.deleteFood(idFood);
+    }
+
+    private FoodServiceImpl() {
     }
 }
