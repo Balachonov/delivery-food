@@ -13,7 +13,7 @@ import static balachonov.util.Constants.*;
 public class StartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String choice = req.getParameter(CHOICE_REQUEST);
+        String choice = req.getParameter(REQUEST_CHOICE);
         switch (choice) {
             case BUTTON_SING_IN:
                 req.getRequestDispatcher(PAGE_SING_IN).forward(req, resp);

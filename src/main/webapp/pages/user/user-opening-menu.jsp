@@ -31,12 +31,10 @@
         <tr>
             <td><input type="submit" name="choice" value="Delete your account"/></td>
         </tr>
+        <tr>
+            <td><input type="submit" name="choice" value="Exit"/></td>
+        </tr>
     </form>
-    <tr>
-        <td>
-            <button onclick="location.href='/'">Exit</button>
-        </td>
-    </tr>
 </table>
 </body>
 </html>

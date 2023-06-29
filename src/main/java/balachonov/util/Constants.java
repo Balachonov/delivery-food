@@ -79,7 +79,7 @@ public final class Constants {
     /**
      * Pages name constants
      */
-    public static final String PAGE_INDEX = "index.jsp";
+    public static final String PAGE_INDEX = "/index.jsp";
     public static final String PAGE_SING_IN = "/pages/user/sing-in.jsp";
     public static final String PAGE_REGISTER = "/pages/user/register.jsp";
     public static final String PAGE_INVALID_USER = "/pages/message/invalid-user.jsp";
@@ -99,17 +99,19 @@ public final class Constants {
     public static final String BUTTON_UPDATE_PERSONAL_DATA = "Update your personal data";
     public static final String BUTTON_VIEW_ALL_PRODUCTS = "View all foods";
     public static final String BUTTON_DELETE_YOUR_ACCOUNT = "Delete your account";
+    public static final String BUTTON_EXIT = "Exit";
 
     /**
      * Request parameter name constants
      */
-    public static final String CHOICE_REQUEST = "choice";
+    public static final String REQUEST_CHOICE = "choice";
+
 
     /**
-     * Constants for the FoodRepository
+     * Regex constants
      */
     public static final String REGEX_EMAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-    public static final String REGEX_PASSWORD = "^(?=.*[A-Z0-9]).{8, }$";
+    public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{8,20}$";
 
     private Constants() {
     }

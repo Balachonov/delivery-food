@@ -51,11 +51,6 @@
             <button type="button" name="back" onclick="history.back()"> Back</button>
         </td>
     </tr>
-    <tr>
-        <td>
-            <button onclick="location.href='/pages/user/update-personal-data.jsp'">Exit</button>
-        </td>
-    </tr>
 </table>
 </body>
 </html>

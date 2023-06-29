@@ -39,11 +39,6 @@
             <button type="button" name="back" onclick="history.back()"> Back</button>
         </td>
     </tr>
-    <tr>
-        <td>
-            <button onclick="location.href='/'">Exit</button>
-        </td>
-    </tr>
 </table>
 </body>
 </html>
