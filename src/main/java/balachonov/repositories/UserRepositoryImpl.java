@@ -26,14 +26,14 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(4, user.getAddress());
             statement.setString(5, user.getPassword());
             statement.setString(6, user.getSalt());
-            statement.setString(7, user.getUserRole().getTitle());
+            statement.setString(7, String.valueOf(user.getUserRole()));
             statement.execute();
             user.setIdUser(getUserId(user));
             return user;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
@@ -50,9 +50,9 @@ public class UserRepositoryImpl implements UserRepository {
             user.setIdUser(getUserId(user));
             return user;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UserRepositoryImpl implements UserRepository {
                 return Optional.of(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -101,7 +101,7 @@ public class UserRepositoryImpl implements UserRepository {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -120,14 +120,14 @@ public class UserRepositoryImpl implements UserRepository {
                 update.setString(4, user.getAddress());
                 update.setString(5, user.getPassword());
                 update.setString(6, user.getSalt());
-                update.setString(7, user.getUserRole().getTitle());
+                update.setString(7, String.valueOf(user.getUserRole()));
                 update.setString(8, userId);
                 update.execute();
                 user.setIdUser(getUserId(user));
                 return Optional.of(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -153,8 +153,9 @@ public class UserRepositoryImpl implements UserRepository {
             }
             return users;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
+        return users;
     }
 
     @Override
@@ -170,8 +171,9 @@ public class UserRepositoryImpl implements UserRepository {
             statement.execute();
             return Optional.of(user);
         } catch (SQLException e) {
-            throw new RuntimeException();
+            System.out.println(e.getMessage());
         }
+        return Optional.of(user);
     }
 
     private String getUserId(User user) {
@@ -180,9 +182,10 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(1, user.getEmail());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-            return resultSet.getString(ID_USER);}
+                return resultSet.getString(ID_USER);
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return USER;
     }

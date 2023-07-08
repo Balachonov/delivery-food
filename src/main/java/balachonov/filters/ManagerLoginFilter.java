@@ -20,11 +20,11 @@ public class ManagerLoginFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpSession session = req.getSession(false);
-        if((session != null) && (session.getAttribute("user") != null)){
+        if ((session != null) && (session.getAttribute("user") != null)) {
             User user = (User) session.getAttribute("user");
-            String userRole = user.getUserRole().getTitle();
-            if(userRole.equalsIgnoreCase(ADMIN.getTitle()) ||
-                    userRole.equalsIgnoreCase(MANAGER.getTitle())){
+            String userRole = String.valueOf(user.getUserRole());
+            if (userRole.equalsIgnoreCase(String.valueOf(ADMIN)) ||
+                    userRole.equalsIgnoreCase(String.valueOf(MANAGER))) {
                 chain.doFilter(req, res);
             }
         } else {

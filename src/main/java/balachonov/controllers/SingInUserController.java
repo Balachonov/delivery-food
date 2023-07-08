@@ -26,18 +26,22 @@ public class SingInUserController extends HttpServlet {
             User user = userInDataBase.get();
             String userPassword = user.getPassword();
             String userSalt = user.getSalt();
-            if(PasswordGenerationAndCheckImpl.getPasswordGenerationAndCheck().
-                    checkPassword(inputPassword, userPassword, userSalt)){
-            HttpSession session = req.getSession();
-            session.setAttribute(USER, user);
-            req.getRequestDispatcher(PAGE_USER_OPENING_MENU).forward(req, resp);}
-            else req.getRequestDispatcher(PAGE_INVALID_USER_PASSWORD).forward(req, resp);
-        }
-        else req.getRequestDispatcher(PAGE_INVALID_USER).forward(req, resp);
+            checkingPassword(req, resp, inputPassword, user, userPassword, userSalt);
+        } else req.getRequestDispatcher(PAGE_INVALID_USER).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPut(req, resp);
+    }
+
+
+    private static void checkingPassword(HttpServletRequest req, HttpServletResponse resp, String inputPassword, User user, String userPassword, String userSalt) throws ServletException, IOException {
+        if (PasswordGenerationAndCheckImpl.getPasswordGenerationAndCheck().
+                checkPassword(inputPassword, userPassword, userSalt)) {
+            HttpSession session = req.getSession();
+            session.setAttribute(USER, user);
+            req.getRequestDispatcher(PAGE_USER_OPENING_MENU).forward(req, resp);
+        } else req.getRequestDispatcher(PAGE_INVALID_USER_PASSWORD).forward(req, resp);
     }
 }

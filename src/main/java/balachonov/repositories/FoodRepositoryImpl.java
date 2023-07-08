@@ -24,14 +24,14 @@ public class FoodRepositoryImpl implements FoodRepository {
             statement.setFloat(3, food.getWeight());
             statement.setString(4, food.getDescription());
             statement.setString(5, food.getComposition());
-            statement.setString(6, food.getFoodType().getTitle());
+            statement.setString(6, String.valueOf(food.getFoodType()));
             statement.execute();
             food.setIdFood(getFoodId(food));
             return food;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class FoodRepositoryImpl implements FoodRepository {
                 return Optional.of(food);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -78,7 +78,7 @@ public class FoodRepositoryImpl implements FoodRepository {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -96,14 +96,14 @@ public class FoodRepositoryImpl implements FoodRepository {
                 update.setFloat(3, food.getWeight());
                 update.setString(4, food.getDescription());
                 update.setString(5, food.getComposition());
-                update.setString(6, food.getFoodType().getTitle());
+                update.setString(6, String.valueOf(food.getFoodType()));
                 update.setString(7, foodId);
                 update.execute();
                 food.setIdFood(getFoodId(food));
                 return Optional.of(food);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -128,8 +128,9 @@ public class FoodRepositoryImpl implements FoodRepository {
             }
             return foods;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
+        return foods;
     }
 
     @Override
@@ -145,8 +146,9 @@ public class FoodRepositoryImpl implements FoodRepository {
             statement.execute();
             return Optional.of(food);
         } catch (SQLException e) {
-            throw new RuntimeException();
+            System.out.println(e.getMessage());
         }
+        return Optional.of(food);
     }
 
     private String getFoodId(Food food) {
@@ -158,7 +160,7 @@ public class FoodRepositoryImpl implements FoodRepository {
                 return resultSet.getString(ID_FOOD);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
         return FOOD;
     }

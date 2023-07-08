@@ -8,7 +8,6 @@ import static balachonov.util.Constants.APP_PROP;
 public final class Properties {
     private static final java.util.Properties PROPERTIES = new java.util.Properties();
 
-
     static {
         loadProperties();
     }

@@ -20,7 +20,7 @@ public class DeleteYourselfUserController extends HttpServlet {
         HttpSession session = req.getSession();
         User userInSession = (User) session.getAttribute(USER);
         String userInputEmail = req.getParameter(USER_EMAIL);
-        if(userInputEmail.equalsIgnoreCase(userInSession.getEmail())){
+        if (userInputEmail.equalsIgnoreCase(userInSession.getEmail())) {
             UserServiceImpl.getUserServiceImpl().deleteUser(userInSession.getIdUser());
         }
         req.getRequestDispatcher(PAGE_REGISTER).forward(req, resp);

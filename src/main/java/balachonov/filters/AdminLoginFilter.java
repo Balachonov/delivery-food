@@ -19,10 +19,10 @@ public class AdminLoginFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpSession session = req.getSession(false);
-        if((session != null) && (session.getAttribute("user") != null)){
+        if ((session != null) && (session.getAttribute("user") != null)) {
             User user = (User) session.getAttribute("user");
-            String userRole = user.getUserRole().getTitle();
-            if(userRole.equalsIgnoreCase(ADMIN.getTitle())){
+            String userRole = String.valueOf(user.getUserRole());
+            if (userRole.equalsIgnoreCase(String.valueOf(ADMIN))) {
                 chain.doFilter(req, res);
             }
         } else {

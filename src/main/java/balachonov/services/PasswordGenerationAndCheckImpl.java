@@ -60,6 +60,5 @@ public class PasswordGenerationAndCheckImpl implements PasswordGenerationAndChec
     }
 
     private PasswordGenerationAndCheckImpl() {
-
     }
 }

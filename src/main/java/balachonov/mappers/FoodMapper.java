@@ -3,8 +3,6 @@ package balachonov.mappers;
 import balachonov.entities.Food;
 import balachonov.entities.FoodType;
 
-import static balachonov.entities.FoodType.*;
-
 public class FoodMapper {
 
     private static FoodMapper foodMapper;
@@ -24,7 +22,7 @@ public class FoodMapper {
                 .weight(weight)
                 .description(description)
                 .composition(composition)
-                .foodType(getType(foodType))
+                .foodType(FoodType.valueOf(foodType))
                 .build();
     }
 
@@ -37,21 +35,9 @@ public class FoodMapper {
                 .weight(weight)
                 .description(description)
                 .composition(composition)
-                .foodType(getType(foodType))
+                .foodType(FoodType.valueOf(foodType))
                 .build();
     }
-
-    private FoodType getType(String type) {
-        if (type.equals(HOT.getTitle())) {
-            return HOT;
-        } else if (type.equals(SNACK.getTitle())) {
-            return SNACK;
-        } else if (type.equals(COLD.getTitle())) {
-            return COLD;
-        } else if (type.equals(DESSERT.getTitle())) {
-            return DESSERT;
-        } else return DRINK;
+    private FoodMapper() {
     }
-
-    private FoodMapper(){}
 }
