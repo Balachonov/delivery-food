@@ -1,5 +1,6 @@
-package balachonov.entities;
+package balachonov.dto;
 
+import balachonov.entities.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "USERS")
-public class User {
+public class UserDto {
 
     @Id
     @GeneratedValue(generator = "uuid")

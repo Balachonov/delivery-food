@@ -2,9 +2,9 @@ package balachonov.mappers;
 
 import balachonov.entities.User;
 import balachonov.entities.UserRole;
-import balachonov.services.PasswordGenerationAndCheckImpl;
+import balachonov.util.PasswordGenerationAndCheckImpl;
 
-import static balachonov.entities.UserRole.*;
+import static balachonov.entities.UserRole.USER;
 
 public class UserMapper {
     private static UserMapper userMapper;

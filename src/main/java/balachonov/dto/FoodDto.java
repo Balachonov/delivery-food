@@ -1,5 +1,6 @@
-package balachonov.entities;
+package balachonov.dto;
 
+import balachonov.entities.FoodType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "FOODS")
-public class Food {
+public class FoodDto {
 
 
     @Id
