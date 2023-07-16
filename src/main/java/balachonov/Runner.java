@@ -1,7 +1,9 @@
 package balachonov;
 
+import balachonov.dto.UserDTO;
 import balachonov.entities.User;
 import balachonov.mappers.UserMapper;
+import balachonov.mappers.UserMapperDto;
 import balachonov.util.JPAUtil;
 
 import javax.persistence.EntityManager;
@@ -11,17 +13,13 @@ public class Runner {
         EntityManager entityManager = JPAUtil.getEntityManager();
         entityManager.getTransaction().begin();
 
-        User user = UserMapper.getUserMapper().simpleBuildUser(
-                "123",
-                "123",
-                "123",
-                "123",
-                "123"
-        );
+        User user = UserMapper.getUserMapper().simpleBuildUser("123", "123", "123", "123", "123");
 
         entityManager.persist(user);
 
         entityManager.getTransaction().commit();
         entityManager.close();
+
     }
+
 }

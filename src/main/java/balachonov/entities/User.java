@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -43,4 +45,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_ROLE")
     private UserRole userRole;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "USERS_FOODS",
+            joinColumns = @JoinColumn(name = "ID_USER"),
+            inverseJoinColumns = @JoinColumn(name = "ID_FOOD")
+    )
+    List<Food> foods = new ArrayList<>();
 }

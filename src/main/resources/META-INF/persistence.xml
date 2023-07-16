@@ -8,6 +8,7 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>balachonov.entities.User</class>
+        <class>balachonov.entities.Food</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.format_sql" value="true"/>
@@ -16,6 +17,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/delivery-food"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="admin"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
 
     </persistence-unit>
