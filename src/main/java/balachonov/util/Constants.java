@@ -30,16 +30,16 @@ public final class Constants {
     /**
      * Constants for the UserRepository
      */
-    public static final String SQL_DELETE_USER = "DELETE FROM users WHERE id_user = ?";
-    public static final String SQL_UPDATE_USER = "UPDATE users SET first_name = ?, last_name = ?, email = ?, " +
-            "address = ?, password = ?, salt = ?, user_role = ?  WHERE id_user = ?";
-    public static final String SQL_GET_USER_BY_ID = "SELECT * FROM users WHERE id_user = ?";
-    public static final String SQL_GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
-    public static final String SQL_GET_ALL_USER = "SELECT * FROM users";
+    public static final String JPQL_READ_USER_BY_ADDRESS = "select u from balachonov.entities.User u where u.address = ?1";
+    public static final String JPQL_READ_ARCHIVE_USER = "select u from balachonov.entities.User u where u.deleted = ?1";
+    public static final String JPQL_READ_USER_BY_EMAIL = "select u from balachonov.entities.User u where u.email = ?1";
+    public static final String JPQL_READ_ALL_USER = "select u from balachonov.entities.User u";
+    public static final String JPQL_READ_ALL_USER_WITH_RESTRICTION = "select u from balachonov.entities.User u where u.userRole = ?1";
     public static final String SQL_ADMIN_CREATE_USER = "INSERT INTO users (first_name, last_name, email, address, " +
             "password, salt, user_role) VALUES (?,?,?,?,?,?,?)";
     public static final String SQL_SIMPLE_CREATE_USER = "INSERT INTO users (first_name, last_name, email, address, " +
             "password, salt) VALUES (?,?,?,?,?,?)";
+
 
     /**
      * Constants for the FoodRepository

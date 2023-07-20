@@ -9,6 +9,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>balachonov.entities.User</class>
         <class>balachonov.entities.Food</class>
+        <class>balachonov.entities.UserFood</class>
+        <class>balachonov.util.UserFoodPK</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.format_sql" value="true"/>

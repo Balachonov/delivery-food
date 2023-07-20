@@ -5,18 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
+@Entity (name = "User")
 @Table(name = "USERS")
-public class User {
+@Where(clause = "DELETED = 0")
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -30,7 +32,7 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @Column(name = "ADDRESS")
@@ -46,11 +48,13 @@ public class User {
     @Column(name = "USER_ROLE")
     private UserRole userRole;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "USERS_FOODS",
-            joinColumns = @JoinColumn(name = "ID_USER"),
-            inverseJoinColumns = @JoinColumn(name = "ID_FOOD")
-    )
-    List<Food> foods = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    List<UserFood> orders;
+
+    @Column(name = "DELETED")
+    private Integer deleted = 0;
+
+    public void setDeleted() {
+        this.deleted = 1;
+    }
 }

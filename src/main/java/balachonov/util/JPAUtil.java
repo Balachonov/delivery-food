@@ -1,19 +1,30 @@
 package balachonov.util;
 
+import balachonov.mappers.UserMapper;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
 
-    static final EntityManager ENTITY_MANAGER = createEntityManager();
+    private static EntityManager entityManager;
 
-    private static EntityManager createEntityManager(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeliveryFoodPersistence");
-        return emf.createEntityManager();
+    public static EntityManager getEntityManager() {
+        if (entityManager == null) {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory
+                    ("DeliveryFoodPersistence");
+            entityManager = emf.createEntityManager();
+        }
+        return entityManager;
     }
 
-    public static EntityManager getEntityManager(){
-        return ENTITY_MANAGER;
+    public static void deleteEntityManager() {
+        if (entityManager != null) {
+            entityManager = null;
+        }
+    }
+
+    private JPAUtil() {
     }
 }

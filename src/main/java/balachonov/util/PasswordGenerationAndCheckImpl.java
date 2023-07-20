@@ -1,4 +1,4 @@
-package balachonov.services;
+package balachonov.util;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

@@ -1,4 +1,4 @@
-package balachonov.services;
+package balachonov.util;
 
 public interface PasswordGenerationAndCheck {
 

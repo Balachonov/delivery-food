@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class FoodDTO {
-
     private String idFood;
     private String name;
     private Float price;
