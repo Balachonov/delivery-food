@@ -1,44 +1,15 @@
 package balachonov.services;
 
-import balachonov.entities.User;
+import balachonov.dto.PersonDto;
+import balachonov.entities.Person;
+import balachonov.repositories.GeneralOperation;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserService {
-
-    /**
-     * Create a new user by admin
-     */
-    User adminCreate(User user);
-
-    /**
-     * Simple create a new user
-     */
-    User simpleCreate(User user);
-
-    /**
-     * Get a user by ID
-     */
-    Optional<User> getUserById(String idUser);
-
-    /**
-     * Get user by email
-     */
-    Optional<User> getUserByEmail(String email);
-
-    /**
-     * Update a user
-     */
-    Optional<User> updateUser(String userId, User user);
-
-    /**
-     * Get all users
-     */
-    List<User> getAllUser();
-
-    /**
-     * Delete a user
-     */
-    Optional<User> deleteUser(String id);
+public interface UserService extends GeneralOperation<String, Person, PersonDto> {
+        List<String> readUserOrders(PersonDto personDTO);
+        Optional<Person> readUserByEmail(String email);
+        Optional<Person> readUserByAddress(String address);
+        List<Person> readArchiveUsers ();
 }

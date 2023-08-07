@@ -7,14 +7,14 @@
     <persistence-unit name="DeliveryFoodPersistence">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>balachonov.entities.User</class>
-        <class>balachonov.entities.Food</class>
-        <class>balachonov.entities.UserFood</class>
-        <class>balachonov.util.UserFoodPK</class>
+        <class>balachonov.entities.Person</class>
+        <class>balachonov.entities.Dish</class>
+        <class>balachonov.entities.Basket</class>
+        <class>balachonov.entities.Address</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.show_sql" value="true" />
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/delivery-food"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>

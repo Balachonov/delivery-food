@@ -1,22 +1,26 @@
 package balachonov.dto;
 
-import balachonov.entities.UserRole;
+import balachonov.enums.PersonRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO {
-    private String idUser;
+public class PersonDto {
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
-    private String address;
+    private List<AddressDto> addresses;
     private String password;
     private String salt;
-    private UserRole userRole;
+    private PersonRole role;
+    private List<BasketDto> baskets;
+    private Integer deleted;
 }

@@ -1,6 +1,6 @@
-package balachonov.entities;
+package balachonov.enums;
 
-public enum FoodType {
+public enum DishType {
     HOT,
     SNACK,
     COLD,

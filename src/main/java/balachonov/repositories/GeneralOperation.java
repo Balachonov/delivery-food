@@ -10,7 +10,7 @@ public interface GeneralOperation<T, E, D> {
 
     List<E> readAllWithRestriction(T t);
 
-    Optional<E> read(T t);
+    Optional<E> readById(T t);
 
     Optional<E> update(D d);
 
