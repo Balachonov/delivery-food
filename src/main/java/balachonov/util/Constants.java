@@ -77,7 +77,19 @@ public final class Constants {
     public static final String PERSON_ADDRESSES = "person.addresses";
     public static final String PERSON_BASKETS = "person.baskets";
 
+    /**
+     * Constants for email sender
+     */
 
+    public static final String COMPANY_GMAIL = "el.grilgo@gmail.com";
+    public static final String PASSWORD_FOR_GMAIL = "mnxpltanqzxqwobd";
+    public static final String HOST = "smtp.gmail.com";
+    public static final String TRUE = "true";
+    public static final String PORT = "587";
+    public static final String MESSAGE_FOR_CLIENT = "Dear, %s. Your order has been accepted and is being prepared." +
+            " Thank you for choosing us";
+    public static final String SUBJECT_MAIL = "Your order in the EL'Grillgo has been confirmed";
+    public static final String TRANSPORT_PROTOCOL = "smtp";
 
     /**
      * Regex constants

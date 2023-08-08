@@ -19,12 +19,11 @@ public class BasketMapper {
 
     public Basket buildBasket(Person owner, List<Dish> dishes,
                               String description, Integer closed) {
-        LocalDateTime orderTime = LocalDateTime.now();
         return Basket.builder()
                 .owner(owner)
                 .dishes(dishes)
                 .description(description)
-                .orderTime(orderTime)
+                .orderTime(LocalDateTime.now())
                 .closed(closed)
                 .build();
     }

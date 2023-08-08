@@ -4,7 +4,7 @@ import balachonov.entities.Address;
 import balachonov.entities.Basket;
 import balachonov.entities.Person;
 import balachonov.enums.PersonRole;
-import balachonov.util.PasswordGenerationAndCheckImpl;
+import balachonov.services.PasswordGenerationAndCheckImpl;
 
 import java.util.List;
 

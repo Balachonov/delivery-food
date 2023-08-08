@@ -41,8 +41,8 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     @Override
-    public List<Person> readAllWithRestriction(String role) {
-        return getPersons(ROLE, role);
+    public List<Person> readAllWithRestriction(String restriction) {
+        return getPersons(ROLE, restriction);
     }
 
     @Override

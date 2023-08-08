@@ -2,7 +2,6 @@ package balachonov.repositories;
 
 import balachonov.dto.DishDto;
 import balachonov.entities.Dish;
-import balachonov.enums.DishType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,27 +16,13 @@ import static balachonov.util.JPAUtil.getEntityManager;
 
 public class DishRepositoryImpl implements DishRepository {
     @Override
-    public List<Dish> readDishByType(DishType type) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Dish> dishCriteriaQuery = cb.createQuery(Dish.class);
-        Root<Dish> dishRoot = dishCriteriaQuery.from(Dish.class);
-        dishCriteriaQuery.select(dishRoot).where(cb.like(dishRoot.get(TYPE), String.valueOf(type)));
-        em.close();
-        return em.createQuery(dishCriteriaQuery).getResultList();
+    public List<Dish> readDishByType(String type) {
+        return getDish(TYPE, type);
     }
 
     @Override
     public List<Dish> readArchiveDish() {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Dish> dishCriteriaQuery = cb.createQuery(Dish.class);
-        Root<Dish> dishRoot = dishCriteriaQuery.from(Dish.class);
-        dishCriteriaQuery.select(dishRoot).where(cb.like(dishRoot.get(DELETED), ONE));
-        em.close();
-        return em.createQuery(dishCriteriaQuery).getResultList();
+        return getDish(DELETED, ONE);
     }
 
     @Override
@@ -65,15 +50,8 @@ public class DishRepositoryImpl implements DishRepository {
     }
 
     @Override
-    public List<Dish> readAllWithRestriction(String name) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Dish> dishCriteriaQuery = cb.createQuery(Dish.class);
-        Root<Dish> dishRoot = dishCriteriaQuery.from(Dish.class);
-        dishCriteriaQuery.select(dishRoot).where(cb.like(dishRoot.get(NAME), name));
-        em.close();
-        return em.createQuery(dishCriteriaQuery).getResultList();
+    public List<Dish> readAllWithRestriction(String restriction) {
+        return getDish(NAME, restriction);
     }
 
     @Override
@@ -105,5 +83,16 @@ public class DishRepositoryImpl implements DishRepository {
         em.getTransaction().commit();
         em.close();
         return Optional.ofNullable(dish);
+    }
+
+    private List<Dish> getDish(String field, String restriction) {
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Dish> dishCriteriaQuery = cb.createQuery(Dish.class);
+        Root<Dish> dishRoot = dishCriteriaQuery.from(Dish.class);
+        dishCriteriaQuery.select(dishRoot).where(cb.like(dishRoot.get(field), restriction));
+        em.close();
+        return em.createQuery(dishCriteriaQuery).getResultList();
     }
 }
