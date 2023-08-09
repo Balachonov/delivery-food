@@ -1,4 +1,4 @@
-package balachonov.mappers;
+package balachonov.mappers.mapstruct;
 
 import balachonov.dto.BasketDto;
 import balachonov.entities.Basket;
@@ -13,7 +13,7 @@ import static balachonov.util.Constants.*;
 public interface BasketMapperDto {
     BasketMapperDto basketMapperDto = Mappers.getMapper(BasketMapperDto.class);
 
-    @Mapping(source = BASKET_DISHES , target = DISHES)
+    @Mapping(source = BASKET_DISHES , target = DISHES_DTO)
     BasketDto toDto(Basket basket);
 
     Basket toEntity(BasketDto basketDTO);

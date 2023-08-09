@@ -19,6 +19,6 @@ public class DishDto {
     private BigDecimal price;
     private String description;
     private DishType type;
-    private List<BasketDto> baskets;
+    private List<BasketDto> basketsDto;
     private Integer deleted;
 }

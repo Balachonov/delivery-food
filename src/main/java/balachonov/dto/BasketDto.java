@@ -15,7 +15,7 @@ import java.util.List;
 public class BasketDto {
     private String id;
     private Person owner;
-    private List<DishDto> dishes;
+    private List<DishDto> dishesDto;
     private String description;
     private LocalDateTime orderTime;
     private Integer closed;

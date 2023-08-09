@@ -1,4 +1,4 @@
-package balachonov.mappers;
+package balachonov.mappers.mapstruct;
 
 import balachonov.dto.DishDto;
 import balachonov.entities.Dish;
@@ -13,7 +13,7 @@ import static balachonov.util.Constants.*;
 public interface DishMapperDto {
     DishMapperDto dishMapperDto = Mappers.getMapper(DishMapperDto.class);
 
-    @Mapping(source = DISH_BASKETS, target = BASKETS)
+    @Mapping(source = DISH_BASKETS, target = BASKETS_DTO)
     DishDto toDto(Dish dish);
 
     Dish toEntity(DishDto dishDTO);

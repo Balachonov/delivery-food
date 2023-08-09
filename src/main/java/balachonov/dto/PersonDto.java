@@ -17,10 +17,10 @@ public class PersonDto {
     private String firstName;
     private String lastName;
     private String email;
-    private List<AddressDto> addresses;
+    private List<AddressDto> addressesDto;
     private String password;
     private String salt;
     private PersonRole role;
-    private List<BasketDto> baskets;
+    private List<BasketDto> basketsDto;
     private Integer deleted;
 }

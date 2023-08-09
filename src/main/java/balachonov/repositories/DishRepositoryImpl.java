@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Optional;
 
-import static balachonov.mappers.DishMapperDto.dishMapperDto;
+import static balachonov.mappers.mapstruct.DishMapperDto.dishMapperDto;
 import static balachonov.util.Constants.*;
 import static balachonov.util.JPAUtil.getEntityManager;
 

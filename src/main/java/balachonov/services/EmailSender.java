@@ -11,14 +11,10 @@ import javax.mail.internet.*;
 import static balachonov.util.Constants.*;
 
 public class EmailSender {
-    public void sendMessageFromGmail(PersonDto personDto){
+    public void sendMessageFromGmail(PersonDto personDto) throws MessagingException {
         Session session = Session.getDefaultInstance(PropertiesUtilForGmail.getPropertiesForGmail());
-        try {
             MimeMessage message = getMimeMessage(personDto, session);
             getTransportForSendMail(session, message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private MimeMessage getMimeMessage(PersonDto personDto, Session session) throws MessagingException {

@@ -26,7 +26,8 @@ public class Address {
     @GeneratedValue(generator = UUID)
     @GenericGenerator(name = UUID,
             strategy = UUID_STRATEGY)
-    @Column(name = ADDRESS_ID, unique = true)
+    @Column(name = ADDRESS_ID, unique = true,
+            updatable = false, nullable = false)
     private String id;
 
     @Enumerated(EnumType.STRING)
@@ -42,7 +43,7 @@ public class Address {
     @Column(name = APARTMENT)
     private String apartment;
 
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = PERSON_ADDRESS,
             joinColumns = @JoinColumn(name = ADDRESS_ID),
             inverseJoinColumns = @JoinColumn(name = PERSON_ID))

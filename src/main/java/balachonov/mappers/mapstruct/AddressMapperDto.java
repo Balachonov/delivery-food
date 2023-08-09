@@ -1,4 +1,4 @@
-package balachonov.mappers;
+package balachonov.mappers.mapstruct;
 
 import balachonov.dto.AddressDto;
 import balachonov.entities.Address;
@@ -9,14 +9,15 @@ import org.mapstruct.factory.Mappers;
 
 import static balachonov.util.Constants.*;
 
-@Mapper (uses = {PersonMapperDto.class})
+@Mapper(uses = {PersonMapperDto.class})
 public interface AddressMapperDto {
 
     AddressMapperDto addressMapperDto = Mappers.getMapper(AddressMapperDto.class);
 
-    @Mapping(source = ADDRESS_PERSON, target = PERSONS)
-    AddressDto toDto (Address Address);
+    @Mapping(source = ADDRESS_PERSONS, target = PERSONS_DTO)
+    AddressDto toDto(Address address);
 
-    Address toEntity (AddressDto addressDTO);
+    Address toEntity(AddressDto addressDTO);
+
     void updateEntity(AddressDto addressDTO, @MappingTarget Address address);
 }

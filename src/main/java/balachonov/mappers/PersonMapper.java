@@ -34,7 +34,7 @@ public class PersonMapper {
                 .password(password)
                 .salt(salt)
                 .role(PersonRole.valueOf(personRole))
-                .orders(orders)
+                .baskets(orders)
                 .build();
     }
 
@@ -52,7 +52,7 @@ public class PersonMapper {
                 .password(password)
                 .salt(salt)
                 .role(PersonRole.valueOf(personRole))
-                .orders(orders)
+                .baskets(orders)
                 .deleted(deleted)
                 .build();
     }
@@ -70,7 +70,7 @@ public class PersonMapper {
                 .password(password)
                 .salt(salt)
                 .role(PersonRole.valueOf(personRole))
-                .orders(orders)
+                .baskets(orders)
                 .deleted(deleted)
                 .build();
     }

@@ -58,7 +58,7 @@ public class Person {
     @OneToMany(mappedBy = BASKET,
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<Basket> orders;
+    private List<Basket> baskets;
 
     @Column(name = DELETED)
     private Integer deleted = 0;

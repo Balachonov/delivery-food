@@ -1,4 +1,4 @@
-package balachonov.mappers;
+package balachonov.mappers.mapstruct;
 
 import balachonov.dto.PersonDto;
 import balachonov.entities.Person;
@@ -16,12 +16,13 @@ public interface PersonMapperDto {
     @Mapping(target = PASSWORD, ignore = true)
     @Mapping(target = SALT, ignore = true)
     @Mapping(target = ROLE, ignore = true)
-    @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES)
-    @Mapping(source = PERSON_BASKETS, target = BASKETS)
+    @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES_DTO)
+    @Mapping(source = PERSON_BASKETS, target = BASKETS_DTO)
     PersonDto toDto(Person person);
 
-    @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES)
-    @Mapping(source = PERSON_BASKETS, target = BASKETS)
+    @DoIgnore
+    @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES_DTO)
+    @Mapping(source = PERSON_BASKETS, target = BASKETS_DTO)
     PersonDto toFullDto(Person person);
 
     Person toEntity(PersonDto personDTO);

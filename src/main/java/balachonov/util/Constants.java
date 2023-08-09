@@ -16,7 +16,6 @@ public final class Constants {
      * Constants for person
      */
     public static final String PERSONS = "persons";
-
     public static final String PERSON_ID = "PERSON_ID";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
@@ -71,12 +70,15 @@ public final class Constants {
     /**
      * Constants for DTO mappers
      */
-    public static final String ADDRESS_PERSON ="address.persons";
+    public static final String ADDRESS_PERSONS ="address.persons";
     public static final String BASKET_DISHES = "basket.dishes";
     public static final String DISH_BASKETS = "dish.baskets";
     public static final String PERSON_ADDRESSES = "person.addresses";
     public static final String PERSON_BASKETS = "person.baskets";
-
+    public static final String PERSONS_DTO = "personsDto";
+    public static final String DISHES_DTO = "dishesDto";
+    public static final String BASKETS_DTO = "basketsDto";
+    public static final String ADDRESSES_DTO = "addressesDto";
     /**
      * Constants for email sender
      */
