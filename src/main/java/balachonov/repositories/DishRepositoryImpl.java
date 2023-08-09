@@ -29,7 +29,7 @@ public class DishRepositoryImpl implements DishRepository {
     public Optional<Dish> create(DishDto dishDto) {
         Dish dish = dishMapperDto.toEntity(dishDto);
         EntityManager em = getEntityManager();
-        em.getTransaction();
+        em.getTransaction().begin();
         em.persist(dish);
         em.getTransaction().commit();
         em.close();

@@ -20,7 +20,7 @@ public class PersonRepositoryImpl implements PersonRepository {
     public Optional<Person> create(PersonDto personDto) {
         Person person = personMapperDto.toEntity(personDto);
         EntityManager em = getEntityManager();
-        em.getTransaction();
+        em.getTransaction().begin();
         em.persist(person);
         em.getTransaction().commit();
         em.close();
