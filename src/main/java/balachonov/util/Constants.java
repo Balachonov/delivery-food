@@ -3,56 +3,60 @@ package balachonov.util;
 public final class Constants {
 
     /**
-     * Constants for user
+     * General constants
      */
-    public static final String USER = "user";
-    public static final String ID_USER = "id_user";
-    public static final String USER_FIRST_NAME = "first_name";
-    public static final String USER_LAST_NAME = "last_name";
-    public static final String USER_EMAIL = "email";
-    public static final String USER_ADDRESS = "address";
-    public static final String USER_PASSWORD = "password";
-    public static final String USER_SALT = "salt";
-    public static final String USER_ROLE = "user_role";
+    public static final String ID = "id";
+    public static final String DELETED = "deleted";
+    public static final String DELETED_ZERO = "DELETED = 0";
+    public static final String UUID = "uuid";
+    public static final String UUID_STRATEGY = "org.hibernate.id.UUIDGenerator";
+    public static final String PERSISTENCE_UNIT_NAME = "DeliveryFoodPersistence";
 
     /**
-     * Constants for food
+     * Constants for person
      */
-    public static final String FOOD = "food";
-    public static final String ID_FOOD = "id_food";
-    public static final String FOOD_SQL_NAME = "name";
-    public static final String FOOD_PRICE = "price";
-    public static final String FOOD_WEIGHT = "weight";
-    public static final String FOOD_DESCRIPTION = "description";
-    public static final String FOOD_COMPOSITION = "composition";
-    public static final String FOOD_TYPE = "food_type";
+    public static final String PERSONS = "persons";
+    public static final String PERSON_ID = "PERSON_ID";
+    public static final String FIRST_NAME = "first_name";
+    public static final String LAST_NAME = "last_name";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
+    public static final String SALT = "salt";
+    public static final String ROLE = "role";
+    public static final String ONE = "1";
 
     /**
-     * Constants for the UserRepository
+     * Constants for address
      */
-    public static final String SQL_DELETE_USER = "DELETE FROM users WHERE id_user = ?";
-    public static final String SQL_UPDATE_USER = "UPDATE users SET first_name = ?, last_name = ?, email = ?, " +
-            "address = ?, password = ?, salt = ?, user_role = ?  WHERE id_user = ?";
-    public static final String SQL_GET_USER_BY_ID = "SELECT * FROM users WHERE id_user = ?";
-    public static final String SQL_GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
-    public static final String SQL_GET_ALL_USER = "SELECT * FROM users";
-    public static final String SQL_ADMIN_CREATE_USER = "INSERT INTO users (first_name, last_name, email, address, " +
-            "password, salt, user_role) VALUES (?,?,?,?,?,?,?)";
-    public static final String SQL_SIMPLE_CREATE_USER = "INSERT INTO users (first_name, last_name, email, address, " +
-            "password, salt) VALUES (?,?,?,?,?,?)";
+    public static final String ADDRESSES = "addresses";
+    public static final String ADDRESS_ID = "ADDRESS_ID";
+    public static final String CITY = "CITY";
+    public static final String STREET = "STREET";
+    public static final String HOUSE = "HOUSE";
+    public static final String APARTMENT = "APARTMENT";
+    public static final String PERSON_ADDRESS = "PERSON_ADDRESS";
 
     /**
-     * Constants for the FoodRepository
+     * Constants for basket
      */
+    public static final String BASKETS = "baskets";
+    public static final String BASKET = "BASKET";
+    public static final String BASKET_ID = "BASKET_ID";
+    public static final String BASKET_DISH = "BASKET_DISH";
+    public static final String DESCRIPTION = "DESCRIPTION";
+    public static final String ORDER_TIME = "ORDER_TIME";
+    public static final String CLOSED_ZERO = "CLOSED = 0";
+    public static final String CLOSED = "CLOSED";
 
-    public static final String SQL_CREATE_FOOD = "INSERT INTO foods (name, price, weight, description, " +
-            "composition, food_type) VALUES (?,?,?,?,?,?)";
-    public static final String SQL_GET_FOOD_BY_ID = "SELECT * FROM foods WHERE id_food = ?";
-    public static final String SQL_GET_FOOD_BY_NAME = "SELECT * FROM foods WHERE name = ?";
-    public static final String SQL_UPDATE_FOOD = "UPDATE foods SET name = ?, price = ?, weight = ?, " +
-            "description = ?, composition = ?, food_type = ?  WHERE id_food = ?";
-    public static final String SQL_GET_ALL_FOOD = "SELECT * FROM foods";
-    public static final String SQL_DELETE_FOOD = "DELETE FROM foods WHERE id_food = ?";
+
+    /**
+     * Constants for dish
+     */
+    public static final String DISHES = "DISHES";
+    public static final String DISH_ID = "DISH_ID";
+    public static final String NAME = "name";
+    public static final String PRICE = "price";
+    public static final String TYPE = "type";
 
     /**
      * Constants for the PasswordGenerationAndCheckImpl
@@ -63,49 +67,57 @@ public final class Constants {
     public static final String DEFAULT = "default";
 
     /**
-     * Constants for the ConnectionManager
+     * Constants for DTO mappers
      */
-    public static final String URL_KEY = "db.url";
-    public static final String USERNAME_KEY = "db.username";
-    public static final String PASSWORD_KEY = "db.password";
-    public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    public static final String ERR = "Ошибка загрузки драйвера";
+    public static final String ADDRESS_PERSONS ="address.persons";
+    public static final String BASKET_DISHES = "basket.dishes";
+    public static final String DISH_BASKETS = "dish.baskets";
+    public static final String PERSON_ADDRESSES = "person.addresses";
+    public static final String PERSON_BASKETS = "person.baskets";
+    public static final String PERSONS_DTO = "personsDto";
+    public static final String DISHES_DTO = "dishesDto";
+    public static final String BASKETS_DTO = "basketsDto";
+    public static final String ADDRESSES_DTO = "addressesDto";
 
     /**
-     * Constants for the Properties of the ConnectionManager
+     * Constants for email sender
      */
-    public static final String APP_PROP = "application.properties";
+    public static final String COMPANY_GMAIL = "el.grilgo@gmail.com";
+    public static final String PASSWORD_FOR_GMAIL = "mnxpltanqzxqwobd";
+    public static final String HOST = "smtp.gmail.com";
+    public static final String TRUE = "true";
+    public static final String PORT = "587";
+    public static final String MESSAGE_FOR_CLIENT = "Dear, %s. Your order has been accepted and is being prepared." +
+            " Thank you for choosing us";
+    public static final String SUBJECT_MAIL = "Your order in the EL'Grillgo has been confirmed";
+    public static final String TRANSPORT_PROTOCOL = "smtp";
 
     /**
-     * Pages name constants
+     * Constants for logger
      */
-    public static final String PAGE_INDEX = "/index.jsp";
-    public static final String PAGE_SING_IN = "/pages/user/sing-in.jsp";
-    public static final String PAGE_REGISTER = "/pages/user/register.jsp";
-    public static final String PAGE_INVALID_USER = "/pages/message/invalid-user.jsp";
-    public static final String PAGE_INVALID_USER_PASSWORD = "/pages/message/invalid-user-password.jsp";
-    public static final String PAGE_INVALID_EMAIL_REGEX = "/pages/message/invalid-email-regex.jsp";
-    public static final String PAGE_INVALID_PASSWORD_REGEX = "/pages/message/invalid-password-regex.jsp";
-    public static final String PAGE_USER_OPENING_MENU = "/pages/user/user-opening-menu.jsp";
-    public static final String PAGE_UPDATE_PERSONAL_DATA = "/pages/user/update-personal-data.jsp";
-    public static final String PAGE_ALL_FOODS = "/pages/food/all-foods.jsp";
-    public static final String PAGE_DELETE_YOUR_ACCOUNT = "/pages/user/delete-yourself.jsp";
-
-    /**
-     * JSP button name constants
-     */
-    public static final String BUTTON_SING_IN = "Sing In";
-    public static final String BUTTON_REGISTER = "Register";
-    public static final String BUTTON_UPDATE_PERSONAL_DATA = "Update your personal data";
-    public static final String BUTTON_VIEW_ALL_PRODUCTS = "View all foods";
-    public static final String BUTTON_DELETE_YOUR_ACCOUNT = "Delete your account";
-    public static final String BUTTON_EXIT = "Exit";
-
-    /**
-     * Request parameter name constants
-     */
-    public static final String REQUEST_CHOICE = "choice";
-
+    public static final String LOG_PERSON_CREATE = "Person entity is create, object: {}";
+    public static final String LOG_PERSON_UPDATE = "Person entity is update, object: {}";
+    public static final String LOG_PERSON_ARCHIVED = "Person entity is archived, object: {}";
+    public static final String LOG_READ_ALL_PERSONS = "Read all persons";
+    public static final String LOG_READ_PERSONS_BY_ROLE = "Received persons by role: {}";
+    public static final String LOG_READ_ARCHIVE_PERSONS = "Received archive persons";
+    public static final String LOG_READ_PERSON_BY_ID = "Received person by id: {}";
+    public static final String LOG_READ_PERSON_BY_EMAIL = "Received person by email: {}";
+    public static final String LOG_READ_DISHES_BY_TYPE = "Received dishes by type: {}";
+    public static final String LOG_READ_ARCHIVE_DISHES = "Received archive dishes";
+    public static final String LOG_DISH_CREATE = "Dish entity is create, object: {}";
+    public static final String LOG_READ_ALL_DISHES = "Read all dishes";
+    public static final String LOG_READ_DISHES_BY_NAME = "Received dishes by name: {}";
+    public static final String LOG_READ_DISHES_BY_ID = "Received dishes by id: {}";
+    public static final String LOG_DISH_UPDATE = "Dish entity is update, object: {}";
+    public static final String LOG_DISH_ARCHIVED = "Dish entity is archived, object: {}";
+    public static final String LOG_PASS_CHECKED = "Password is checked";
+    public static final String LOG_PASS_GENERATED = "Password is generated";
+    public static final String LOG_ERR_PASS_GENERATED = "Password not generated";
+    public static final String LOG_SALT_GENERATED = "Salt is generated";
+    public static final String LOG_ERR_SALT_GENERATED = "Salt not generated";
+    public static final String LOG_ERR_SEND_MESSAGE = "Message not send";
+    public static final String LOG_SEND_MESSAGE = "Message is send, email: {}";
 
     /**
      * Regex constants
