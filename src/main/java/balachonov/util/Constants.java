@@ -28,7 +28,6 @@ public final class Constants {
     /**
      * Constants for address
      */
-
     public static final String ADDRESSES = "addresses";
     public static final String ADDRESS_ID = "ADDRESS_ID";
     public static final String CITY = "CITY";
@@ -79,10 +78,10 @@ public final class Constants {
     public static final String DISHES_DTO = "dishesDto";
     public static final String BASKETS_DTO = "basketsDto";
     public static final String ADDRESSES_DTO = "addressesDto";
+
     /**
      * Constants for email sender
      */
-
     public static final String COMPANY_GMAIL = "el.grilgo@gmail.com";
     public static final String PASSWORD_FOR_GMAIL = "mnxpltanqzxqwobd";
     public static final String HOST = "smtp.gmail.com";
@@ -92,6 +91,33 @@ public final class Constants {
             " Thank you for choosing us";
     public static final String SUBJECT_MAIL = "Your order in the EL'Grillgo has been confirmed";
     public static final String TRANSPORT_PROTOCOL = "smtp";
+
+    /**
+     * Constants for logger
+     */
+    public static final String LOG_PERSON_CREATE = "Person entity is create, object: {}";
+    public static final String LOG_PERSON_UPDATE = "Person entity is update, object: {}";
+    public static final String LOG_PERSON_ARCHIVED = "Person entity is archived, object: {}";
+    public static final String LOG_READ_ALL_PERSONS = "Read all persons";
+    public static final String LOG_READ_PERSONS_BY_ROLE = "Received persons by role: {}";
+    public static final String LOG_READ_ARCHIVE_PERSONS = "Received archive persons";
+    public static final String LOG_READ_PERSON_BY_ID = "Received person by id: {}";
+    public static final String LOG_READ_PERSON_BY_EMAIL = "Received person by email: {}";
+    public static final String LOG_READ_DISHES_BY_TYPE = "Received dishes by type: {}";
+    public static final String LOG_READ_ARCHIVE_DISHES = "Received archive dishes";
+    public static final String LOG_DISH_CREATE = "Dish entity is create, object: {}";
+    public static final String LOG_READ_ALL_DISHES = "Read all dishes";
+    public static final String LOG_READ_DISHES_BY_NAME = "Received dishes by name: {}";
+    public static final String LOG_READ_DISHES_BY_ID = "Received dishes by id: {}";
+    public static final String LOG_DISH_UPDATE = "Dish entity is update, object: {}";
+    public static final String LOG_DISH_ARCHIVED = "Dish entity is archived, object: {}";
+    public static final String LOG_PASS_CHECKED = "Password is checked";
+    public static final String LOG_PASS_GENERATED = "Password is generated";
+    public static final String LOG_ERR_PASS_GENERATED = "Password not generated";
+    public static final String LOG_SALT_GENERATED = "Salt is generated";
+    public static final String LOG_ERR_SALT_GENERATED = "Salt not generated";
+    public static final String LOG_ERR_SEND_MESSAGE = "Message not send";
+    public static final String LOG_SEND_MESSAGE = "Message is send, email: {}";
 
     /**
      * Regex constants

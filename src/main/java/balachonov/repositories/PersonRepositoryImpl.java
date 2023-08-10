@@ -2,6 +2,7 @@ package balachonov.repositories;
 
 import balachonov.dto.PersonDto;
 import balachonov.entities.Person;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import static balachonov.mappers.mapstruct.PersonMapperDto.personMapperDto;
 import static balachonov.util.Constants.*;
 import static balachonov.util.JPAUtil.getEntityManager;
-
+@Slf4j
 public class PersonRepositoryImpl implements PersonRepository {
 
     @Override
@@ -24,6 +25,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         em.persist(person);
         em.getTransaction().commit();
         em.close();
+        log.info(LOG_PERSON_CREATE, person);
         return Optional.ofNullable(person);
     }
 
@@ -37,16 +39,19 @@ public class PersonRepositoryImpl implements PersonRepository {
         personCriteriaQuery.select(personRoot);
         List<Person> persons = em.createQuery(personCriteriaQuery).getResultList();
         em.close();
+        log.info(LOG_READ_ALL_PERSONS);
         return persons;
     }
 
     @Override
     public List<Person> readAllWithRestriction(String restriction) {
+        log.info(LOG_READ_PERSONS_BY_ROLE, restriction);
         return getPersons(ROLE, restriction);
     }
 
     @Override
     public List<Person> readArchiveUsers() {
+        log.info(LOG_READ_ARCHIVE_PERSONS);
         return getPersons(DELETED, ONE);
     }
 
@@ -56,6 +61,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         em.getTransaction().begin();
         Person person = em.find(Person.class, id);
         em.close();
+        log.info(LOG_READ_PERSON_BY_ID, id);
         return Optional.ofNullable(person);
     }
 
@@ -67,6 +73,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         personMapperDto.updateEntity(personDto, person);
         em.getTransaction().commit();
         em.close();
+        log.info(LOG_PERSON_UPDATE, person);
         return Optional.ofNullable(person);
     }
 
@@ -78,6 +85,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         person.setDeleted();
         em.getTransaction().commit();
         em.close();
+        log.info(LOG_PERSON_ARCHIVED, person);
         return Optional.ofNullable(person);
     }
 
@@ -91,6 +99,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         personCriteriaQuery.select(personRoot).where(cb.like(personRoot.get(EMAIL), email));
         Optional<Person> person = Optional.ofNullable(em.createQuery(personCriteriaQuery).getSingleResult());
         em.close();
+        log.info(LOG_READ_PERSON_BY_EMAIL, email);
         return person;
     }
 
