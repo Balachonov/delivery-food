@@ -20,25 +20,25 @@ public class PersonRepositoryImpl implements PersonRepository {
     @Override
     public Optional<Person> create(PersonDto personDto) {
         Person person = personMapperDto.toEntity(personDto);
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(person);
-        em.getTransaction().commit();
-        em.close();
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(person);
+        entityManager.getTransaction().commit();
+        entityManager.close();
         log.info(LOG_PERSON_CREATE, person);
         return Optional.ofNullable(person);
     }
 
     @Override
     public List<Person> readAll() {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Person> personCriteriaQuery = cb.createQuery(Person.class);
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Person> personCriteriaQuery = criteriaBuilder.createQuery(Person.class);
         Root<Person> personRoot = personCriteriaQuery.from(Person.class);
         personCriteriaQuery.select(personRoot);
-        List<Person> persons = em.createQuery(personCriteriaQuery).getResultList();
-        em.close();
+        List<Person> persons = entityManager.createQuery(personCriteriaQuery).getResultList();
+        entityManager.close();
         log.info(LOG_READ_ALL_PERSONS);
         return persons;
     }
@@ -57,61 +57,61 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     @Override
     public Optional<Person> readById(String id) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Person person = em.find(Person.class, id);
-        em.close();
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Person person = entityManager.find(Person.class, id);
+        entityManager.close();
         log.info(LOG_READ_PERSON_BY_ID, id);
         return Optional.ofNullable(person);
     }
 
     @Override
     public Optional<Person> update(PersonDto personDto) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Person person = em.find(Person.class, personDto.getId());
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Person person = entityManager.find(Person.class, personDto.getId());
         personMapperDto.updateEntity(personDto, person);
-        em.getTransaction().commit();
-        em.close();
+        entityManager.getTransaction().commit();
+        entityManager.close();
         log.info(LOG_PERSON_UPDATE, person);
         return Optional.ofNullable(person);
     }
 
     @Override
     public Optional<Person> delete(PersonDto personDto) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Person person = em.find(Person.class, personDto.getId());
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Person person = entityManager.find(Person.class, personDto.getId());
         person.setDeleted();
-        em.getTransaction().commit();
-        em.close();
+        entityManager.getTransaction().commit();
+        entityManager.close();
         log.info(LOG_PERSON_ARCHIVED, person);
         return Optional.ofNullable(person);
     }
 
     @Override
     public Optional<Person> readUserByEmail(String email) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Person> personCriteriaQuery = cb.createQuery(Person.class);
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Person> personCriteriaQuery = criteriaBuilder.createQuery(Person.class);
         Root<Person> personRoot = personCriteriaQuery.from(Person.class);
-        personCriteriaQuery.select(personRoot).where(cb.like(personRoot.get(EMAIL), email));
-        Optional<Person> person = Optional.ofNullable(em.createQuery(personCriteriaQuery).getSingleResult());
-        em.close();
+        personCriteriaQuery.select(personRoot).where(criteriaBuilder.like(personRoot.get(EMAIL), email));
+        Optional<Person> person = Optional.ofNullable(entityManager.createQuery(personCriteriaQuery).getSingleResult());
+        entityManager.close();
         log.info(LOG_READ_PERSON_BY_EMAIL, email);
         return person;
     }
 
     private List<Person> getPersons(String field, String restriction) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Person> personCriteriaQuery = cb.createQuery(Person.class);
         Root<Person> personRoot = personCriteriaQuery.from(Person.class);
         personCriteriaQuery.select(personRoot).where(cb.like(personRoot.get(field), restriction));
-        List<Person> persons = em.createQuery(personCriteriaQuery).getResultList();
-        em.close();
+        List<Person> persons = entityManager.createQuery(personCriteriaQuery).getResultList();
+        entityManager.close();
         return persons;
     }
 }

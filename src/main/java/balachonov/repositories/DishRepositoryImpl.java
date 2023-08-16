@@ -31,25 +31,25 @@ public class DishRepositoryImpl implements DishRepository {
     @Override
     public Optional<Dish> create(DishDto dishDto) {
         Dish dish = dishMapperDto.toEntity(dishDto);
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        em.persist(dish);
-        em.getTransaction().commit();
-        em.close();
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(dish);
+        entityManager.getTransaction().commit();
+        entityManager.close();
         log.info(LOG_DISH_CREATE, dish);
         return Optional.ofNullable(dish);
     }
 
     @Override
     public List<Dish> readAll() {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Dish> dishCriteriaQuery = cb.createQuery(Dish.class);
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Dish> dishCriteriaQuery = criteriaBuilder.createQuery(Dish.class);
         Root<Dish> dishRoot = dishCriteriaQuery.from(Dish.class);
         dishCriteriaQuery.select(dishRoot);
-        List<Dish> dishes = em.createQuery(dishCriteriaQuery).getResultList();
-        em.close();
+        List<Dish> dishes = entityManager.createQuery(dishCriteriaQuery).getResultList();
+        entityManager.close();
         log.info(LOG_READ_ALL_DISHES);
         return dishes;
     }
@@ -62,46 +62,46 @@ public class DishRepositoryImpl implements DishRepository {
 
     @Override
     public Optional<Dish> readById(String id) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Dish dish = em.find(Dish.class, id);
-        em.close();
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Dish dish = entityManager.find(Dish.class, id);
+        entityManager.close();
         log.info(LOG_READ_DISHES_BY_ID, id);
         return Optional.ofNullable(dish);
     }
 
     @Override
     public Optional<Dish> update(DishDto dishDto) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Dish dish = em.find(Dish.class, dishDto.getId());
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Dish dish = entityManager.find(Dish.class, dishDto.getId());
         dishMapperDto.updateEntity(dishDto, dish);
-        em.getTransaction().commit();
-        em.close();
+        entityManager.getTransaction().commit();
+        entityManager.close();
         log.info(LOG_DISH_UPDATE, dish);
         return Optional.ofNullable(dish);
     }
 
     @Override
     public Optional<Dish> delete(DishDto dishDto) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Dish dish = em.find(Dish.class, dishDto.getId());
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        Dish dish = entityManager.find(Dish.class, dishDto.getId());
         dish.setDeleted();
-        em.getTransaction().commit();
-        em.close();
+        entityManager.getTransaction().commit();
+        entityManager.close();
         log.info(LOG_DISH_ARCHIVED, dish);
         return Optional.ofNullable(dish);
     }
 
     private List<Dish> getDish(String field, String restriction) {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Dish> dishCriteriaQuery = cb.createQuery(Dish.class);
+        EntityManager entityManager = getEntityManager();
+        entityManager.getTransaction().begin();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Dish> dishCriteriaQuery = criteriaBuilder.createQuery(Dish.class);
         Root<Dish> dishRoot = dishCriteriaQuery.from(Dish.class);
-        dishCriteriaQuery.select(dishRoot).where(cb.like(dishRoot.get(field), restriction));
-        em.close();
-        return em.createQuery(dishCriteriaQuery).getResultList();
+        dishCriteriaQuery.select(dishRoot).where(criteriaBuilder.like(dishRoot.get(field), restriction));
+        entityManager.close();
+        return entityManager.createQuery(dishCriteriaQuery).getResultList();
     }
 }
