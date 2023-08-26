@@ -79,14 +79,13 @@ public final class Constants {
      * Constants for email sender
      */
     public static final String COMPANY_GMAIL = "el.grilgo@gmail.com";
-    public static final String PASSWORD_FOR_GMAIL = "mnxpltanqzxqwobd";
-    public static final String HOST = "smtp.gmail.com";
-    public static final String TRUE = "true";
-    public static final String PORT = "587";
-    public static final String MESSAGE_FOR_CLIENT = "Dear, %s. Your order has been accepted and is being prepared." +
+    public static final String MESSAGE_BASKET = "Your order has been accepted and is being prepared." +
             " Thank you for choosing us";
-    public static final String SUBJECT_MAIL = "Your order in the EL'Grillgo has been confirmed";
-    public static final String TRANSPORT_PROTOCOL = "smtp";
+    public static final String SUBJECT_BASKET = "Your order in the EL'Grillgo has been confirmed";
+    public static final String SUBJECT_SUCCESSFUL_REGISTRATION = "Successful registration";
+    public static final String MESSAGE_SUCCESSFUL_REGISTRATION = "Thank you for choosing food delivery from our" +
+            " campaign. We will feed you.";
+
     /**
      * Constants for service exception
      */
@@ -122,6 +121,9 @@ public final class Constants {
     public static final String LOG_ERR_PASS_GENERATED = "Password not generated";
     public static final String LOG_SALT_GENERATED = "Salt is generated";
     public static final String LOG_ERR_SALT_GENERATED = "Salt not generated";
+    public static final String LOG_ERR_EXCEPTION = "EXCEPTION: {}";
+    public static final String LOG_ERR_NOT_FOUND_PERSON = "The requested person was not found";
+    public static final String WRITE_TO_US = "Write to us: ";
     public static final String LOG_ERR_SEND_MESSAGE = "Message not send";
     public static final String LOG_SEND_MESSAGE = "Message is send, email: {}";
 

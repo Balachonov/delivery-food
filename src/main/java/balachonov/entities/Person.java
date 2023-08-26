@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.Where;
 
 import java.util.List;
@@ -19,8 +20,8 @@ import static jakarta.persistence.EnumType.STRING;
 @NoArgsConstructor
 @Builder
 @Entity
+@Accessors(chain = true)
 @Table(name = PERSONS)
-@Where(clause = DELETED_ZERO)
 public class Person {
 
     @Id
@@ -29,13 +30,13 @@ public class Person {
             updatable = false)
     private UUID id;
 
-    @Column(name = FIRST_NAME)
+    @Column(name = FIRST_NAME, nullable = false)
     private String firstName;
 
-    @Column(name = LAST_NAME)
+    @Column(name = LAST_NAME, nullable = false)
     private String lastName;
 
-    @Column(name = EMAIL, unique = true)
+    @Column(name = EMAIL, unique = true, nullable = false)
     private String email;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -44,14 +45,14 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = ADDRESS_ID))
     private List<Address> addresses;
 
-    @Column(name = PASSWORD)
+    @Column(name = PASSWORD, nullable = false)
     private String password;
 
     @Column(name = SALT)
     private String salt;
 
     @Enumerated(STRING)
-    @Column(name = ROLE)
+    @Column(name = ROLE, nullable = false)
     private PersonRole role;
 
     @OneToMany(mappedBy = PERSON,
@@ -60,7 +61,7 @@ public class Person {
     private List<Basket> baskets;
 
     @Column(name = DELETED)
-    private Integer deleted = 0;
+    private Integer deleted;
 
     public void setDeleted() {
         this.deleted = 1;

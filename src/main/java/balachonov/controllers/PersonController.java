@@ -2,6 +2,7 @@ package balachonov.controllers;
 
 import balachonov.dto.requests.PersonDtoRequest;
 import balachonov.dto.responses.PersonDtoResponse;
+import balachonov.services.EmailService;
 import balachonov.services.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +16,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PersonController {
 
-    @Qualifier("personService")
     private final PersonService PERSON_SERVICE;
 
     @PostMapping(value = "person")

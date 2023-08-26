@@ -2,8 +2,10 @@ package balachonov.services.impl;
 
 import balachonov.dto.requests.PersonDtoRequest;
 import balachonov.dto.responses.PersonDtoResponse;
+import balachonov.enums.PersonRole;
 import balachonov.mappers.PersonMapperDto;
 import balachonov.repositories.PersonRepository;
+import balachonov.services.EmailService;
 import balachonov.services.PasswordGenerationAndCheck;
 import balachonov.services.PersonService;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +23,7 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
+    private final EmailService EMAIL_SERVICE;
     private final PersonRepository PERSON_REPOSITORY;
     private final PasswordGenerationAndCheck PASSWORD_SERVICE;
     private final PersonMapperDto PERSON_MAPPER;
@@ -31,6 +34,9 @@ public class PersonServiceImpl implements PersonService {
         PersonDtoResponse personDtoResponse = PERSON_MAPPER.createPersonDtoResponse(personDtoRequest);
         personDtoResponse.setSalt(salt);
         personDtoResponse.setPassword(PASSWORD_SERVICE.getHashPassword(personDtoRequest.getPassword(), salt));
+        personDtoResponse.setRole(PersonRole.USER);
+        personDtoResponse.setDeleted(0);
+        EMAIL_SERVICE.sendSuccessfulRegistrationMail(personDtoRequest.getEmail());
         return PERSON_MAPPER.toDto(PERSON_REPOSITORY.save(PERSON_MAPPER.toEntity(personDtoResponse)));
     }
 
@@ -60,7 +66,7 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonDtoResponse> getAllPersons() {
         return PERSON_REPOSITORY.findAll()
                 .stream()
-                .map(PERSON_MAPPER:: toDto)
+                .map(PERSON_MAPPER::toDto)
                 .toList();
     }
 
