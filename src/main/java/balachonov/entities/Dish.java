@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import static balachonov.util.Constants.*;
+import static jakarta.persistence.EnumType.STRING;
 
 @Data
 @AllArgsConstructor
@@ -24,11 +26,9 @@ import static balachonov.util.Constants.*;
 public class Dish {
 
     @Id
-    @GeneratedValue(generator = UUID)
-    @GenericGenerator(name = UUID,
-            strategy = UUID_STRATEGY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = DISH_ID, unique = true)
-    private String id;
+    private UUID id;
 
     @Column(name = NAME, nullable = false)
     private String name;
@@ -39,7 +39,7 @@ public class Dish {
     @Column(name = DESCRIPTION, nullable = false)
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @Column(name = TYPE, nullable = false)
     private DishType type;
 

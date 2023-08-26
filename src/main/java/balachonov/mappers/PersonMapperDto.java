@@ -1,31 +1,33 @@
-package balachonov.mappers.mapstruct;
+package balachonov.mappers;
 
-import balachonov.dto.PersonDto;
+import balachonov.dto.requests.PersonDtoRequest;
+import balachonov.dto.responses.PersonDtoResponse;
 import balachonov.entities.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
 
 import static balachonov.util.Constants.*;
 
-@Mapper(uses = {AddressMapperDto.class, BasketMapperDto.class})
+@Mapper(uses = {AddressMapperDto.class, BasketMapperDto.class}, componentModel = SPRING)
 public interface PersonMapperDto {
-    PersonMapperDto personMapperDto = Mappers.getMapper(PersonMapperDto.class);
+
 
     @Mapping(target = PASSWORD, ignore = true)
     @Mapping(target = SALT, ignore = true)
     @Mapping(target = ROLE, ignore = true)
     @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES_DTO)
     @Mapping(source = PERSON_BASKETS, target = BASKETS_DTO)
-    PersonDto toDto(Person person);
+    PersonDtoResponse toDto(Person person);
+
+    PersonDtoResponse createPersonDtoResponse(PersonDtoRequest personDtoRequest);
 
     @DoIgnore
     @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES_DTO)
     @Mapping(source = PERSON_BASKETS, target = BASKETS_DTO)
-    PersonDto toFullDto(Person person);
+    PersonDtoResponse toFullDto(Person person);
 
-    Person toEntity(PersonDto personDTO);
+    Person toEntity(PersonDtoResponse personDTO);
 
-    void updateEntity (PersonDto personDTO, @MappingTarget Person person);
+    void updateEntity(PersonDtoResponse personDTO, @MappingTarget Person person);
 }

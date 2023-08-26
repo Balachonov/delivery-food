@@ -1,0 +1,14 @@
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: delivery-food
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8888
+  profiles:
+    active: test
+
+server:
+  port: 8080

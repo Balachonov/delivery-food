@@ -5,17 +5,15 @@ public final class Constants {
     /**
      * General constants
      */
-    public static final String ID = "id";
     public static final String DELETED = "deleted";
     public static final String DELETED_ZERO = "DELETED = 0";
-    public static final String UUID = "uuid";
-    public static final String UUID_STRATEGY = "org.hibernate.id.UUIDGenerator";
-    public static final String PERSISTENCE_UNIT_NAME = "DeliveryFoodPersistence";
+    public static final String SPRING = "spring";
 
     /**
      * Constants for person
      */
     public static final String PERSONS = "persons";
+    public static final String PERSON = "person";
     public static final String PERSON_ID = "PERSON_ID";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
@@ -23,7 +21,6 @@ public final class Constants {
     public static final String PASSWORD = "password";
     public static final String SALT = "salt";
     public static final String ROLE = "role";
-    public static final String ONE = "1";
 
     /**
      * Constants for address
@@ -64,7 +61,6 @@ public final class Constants {
     public static final String ALGORITHM_PASS = "PBKDF2WithHmacSHA1";
     public static final String ALGORITHM_SALT = "SHA1PRNG";
     public static final String CODE = "UTF_16";
-    public static final String DEFAULT = "default";
 
     /**
      * Constants for DTO mappers
@@ -91,6 +87,16 @@ public final class Constants {
             " Thank you for choosing us";
     public static final String SUBJECT_MAIL = "Your order in the EL'Grillgo has been confirmed";
     public static final String TRANSPORT_PROTOCOL = "smtp";
+    /**
+     * Constants for service exception
+     */
+    public static final String PERSON_NOT_FOUND_BY_ID = "Person with id - %s is not found";
+    public static final String PERSON_NOT_FOUND_BY_EMAIL = "Person with email - %s is not found";
+
+    /**
+     * Constants for service HQL
+     */
+    public static final String PERSON_DELETE = "update Person person set person.deleted = 1 where person.id = ?1";
 
     /**
      * Constants for logger
@@ -118,12 +124,6 @@ public final class Constants {
     public static final String LOG_ERR_SALT_GENERATED = "Salt not generated";
     public static final String LOG_ERR_SEND_MESSAGE = "Message not send";
     public static final String LOG_SEND_MESSAGE = "Message is send, email: {}";
-
-    /**
-     * Regex constants
-     */
-    public static final String REGEX_EMAIL = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-    public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{8,20}$";
 
     private Constants() {
     }

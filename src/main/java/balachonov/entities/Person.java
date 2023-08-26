@@ -1,17 +1,18 @@
 package balachonov.entities;
 
 import balachonov.enums.PersonRole;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 import static balachonov.util.Constants.*;
+import static jakarta.persistence.EnumType.STRING;
 
 @Data
 @AllArgsConstructor
@@ -23,20 +24,18 @@ import static balachonov.util.Constants.*;
 public class Person {
 
     @Id
-    @GeneratedValue(generator = UUID)
-    @GenericGenerator(name = UUID,
-            strategy = UUID_STRATEGY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = PERSON_ID, unique = true,
-            updatable = false, nullable = false)
-    private String id;
+            updatable = false)
+    private UUID id;
 
-    @Column(name = FIRST_NAME, nullable = false)
+    @Column(name = FIRST_NAME)
     private String firstName;
 
     @Column(name = LAST_NAME)
     private String lastName;
 
-    @Column(name = EMAIL, unique = true, nullable = false)
+    @Column(name = EMAIL, unique = true)
     private String email;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -45,17 +44,17 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = ADDRESS_ID))
     private List<Address> addresses;
 
-    @Column(name = PASSWORD, nullable = false)
+    @Column(name = PASSWORD)
     private String password;
 
-    @Column(name = SALT, nullable = false)
+    @Column(name = SALT)
     private String salt;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = ROLE, nullable = false)
+    @Enumerated(STRING)
+    @Column(name = ROLE)
     private PersonRole role;
 
-    @OneToMany(mappedBy = BASKET,
+    @OneToMany(mappedBy = PERSON,
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Basket> baskets;

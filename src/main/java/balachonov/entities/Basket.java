@@ -1,15 +1,15 @@
 package balachonov.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import static balachonov.util.Constants.*;
 
@@ -23,15 +23,13 @@ import static balachonov.util.Constants.*;
 public class Basket {
 
     @Id
-    @GeneratedValue(generator = UUID)
-    @GenericGenerator(name = UUID,
-            strategy = UUID_STRATEGY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = BASKET_ID, unique = true)
-    private String id;
+    private UUID id;
 
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = PERSON_ID)
-    private Person owner;
+    private Person person;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = BASKET_DISH,

@@ -1,15 +1,25 @@
 package balachonov.services;
 
-import balachonov.dto.PersonDto;
-import balachonov.entities.Person;
-import balachonov.repositories.GeneralOperation;
+import balachonov.dto.requests.PersonDtoRequest;
+import balachonov.dto.responses.PersonDtoResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
-public interface PersonService extends GeneralOperation<String, Person, PersonDto> {
-        List<String> readPersonOrders(PersonDto personDTO);
-        Optional<Person> readPersonByEmail(String email);
-        Optional<Person> readPersonByAddress(String address);
-        List<Person> readArchivePersons();
+@Service
+public interface PersonService {
+    PersonDtoResponse savePerson(PersonDtoRequest personDtoRequest);
+
+    PersonDtoResponse readPersonById(UUID id);
+
+    PersonDtoResponse readPersonByEmail(String email);
+
+    List<PersonDtoResponse> getAllActivePersons();
+
+    List<PersonDtoResponse> getAllPersons();
+
+    List<PersonDtoResponse> readArchivePersons();
+
+    PersonDtoResponse deletePerson(UUID id);
 }

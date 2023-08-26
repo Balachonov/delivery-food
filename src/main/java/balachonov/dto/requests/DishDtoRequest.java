@@ -1,5 +1,6 @@
-package balachonov.dto;
+package balachonov.dto.requests;
 
+import balachonov.dto.responses.BasketDtoResponse;
 import balachonov.enums.DishType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,12 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DishDto {
-    private String id;
+public class DishDtoRequest {
     private String name;
     private BigDecimal price;
     private String description;
     private DishType type;
-    private List<BasketDto> basketsDto;
+    private List<BasketDtoResponse> basketsDto;
     private Integer deleted;
 }

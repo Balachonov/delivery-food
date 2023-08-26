@@ -1,4 +1,4 @@
-package balachonov.mappers.mapstruct;
+package balachonov.mappers;
 
 import org.mapstruct.Qualifier;
 

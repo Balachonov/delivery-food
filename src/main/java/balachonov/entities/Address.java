@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 import static balachonov.util.Constants.*;
+import static jakarta.persistence.EnumType.STRING;
 
 @Data
 @AllArgsConstructor
@@ -23,14 +25,12 @@ import static balachonov.util.Constants.*;
 public class Address {
 
     @Id
-    @GeneratedValue(generator = UUID)
-    @GenericGenerator(name = UUID,
-            strategy = UUID_STRATEGY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = ADDRESS_ID, unique = true,
             updatable = false, nullable = false)
-    private String id;
+    private UUID id;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @Column(name = CITY, nullable = false)
     private City city;
 
