@@ -1,18 +1,17 @@
 package balachonov.services;
 
-import balachonov.dto.requests.AddressDtoRequest;
-import balachonov.dto.responses.AddressDtoResponse;
-import org.springframework.stereotype.Service;
+import balachonov.dto.requests.AddressRequest;
+import balachonov.dto.responses.AddressResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
 public interface AddressService {
-    AddressDtoResponse saveAddress(AddressDtoRequest addressDtoRequest);
+    AddressResponse saveAddress(AddressRequest addressDtoRequest);
 
-    AddressDtoResponse readAddressById(UUID id);
+    AddressResponse readAddressById(UUID id);
 
-    List<AddressDtoResponse> getAllAddresses();
-    AddressDtoResponse deleteAddress(String id);
+    List<AddressResponse> getAllAddresses();
+
+    AddressResponse deleteAddress(String id);
 }

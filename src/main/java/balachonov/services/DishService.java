@@ -1,25 +1,23 @@
 package balachonov.services;
 
-import balachonov.dto.requests.DishDtoRequest;
-import balachonov.dto.responses.DishDtoResponse;
-import org.springframework.stereotype.Service;
+import balachonov.dto.requests.DishRequest;
+import balachonov.dto.responses.DishResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
 public interface DishService {
-    DishDtoResponse saveDish(DishDtoRequest dishDtoRequest);
+    DishResponse saveDish(DishRequest dishDtoRequest);
 
-    DishDtoResponse readDishById(UUID id);
+    DishResponse readDishById(UUID id);
 
-    DishDtoResponse readDishByName(String name);
+    DishResponse readDishByName(String name);
 
-    List<DishDtoResponse> getAllActiveDishes();
+    List<DishResponse> getAllActiveDishes();
 
-    List<DishDtoResponse> getAllDish();
+    List<DishResponse> getAllDish();
 
-    List<DishDtoResponse> readArchiveDishes();
+    List<DishResponse> readArchiveDishes();
 
-    DishDtoResponse deleteDish(String id);
+    DishResponse deleteDish(String id);
 }

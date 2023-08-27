@@ -1,14 +1,12 @@
 package balachonov.entities;
 
 import balachonov.enums.City;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
 
-import jakarta.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +19,6 @@ import static jakarta.persistence.EnumType.STRING;
 @Builder
 @Entity
 @Table(name = ADDRESSES)
-@Where(clause = DELETED_ZERO)
 public class Address {
 
     @Id

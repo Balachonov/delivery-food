@@ -37,14 +37,12 @@ public final class Constants {
      * Constants for basket
      */
     public static final String BASKETS = "baskets";
-    public static final String BASKET = "BASKET";
     public static final String BASKET_ID = "BASKET_ID";
     public static final String BASKET_DISH = "BASKET_DISH";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String ORDER_TIME = "ORDER_TIME";
     public static final String CLOSED_ZERO = "CLOSED = 0";
     public static final String CLOSED = "CLOSED";
-
 
     /**
      * Constants for dish
@@ -91,41 +89,15 @@ public final class Constants {
      */
     public static final String PERSON_NOT_FOUND_BY_ID = "Person with id - %s is not found";
     public static final String PERSON_NOT_FOUND_BY_EMAIL = "Person with email - %s is not found";
+    public static final String LOG_ERR_EXCEPTION = "EXCEPTION: {}";
+    public static final String ERR_VALID_MESSAGE = "Field: %s. Error: %s";
+    public static final String ERR_PASSWORD_GENERATION_MESSAGE = "Oops. There are problems on the server. We are " +
+            "already solving them.";
 
     /**
      * Constants for service HQL
      */
-    public static final String PERSON_DELETE = "update Person person set person.deleted = 1 where person.id = ?1";
-
-    /**
-     * Constants for logger
-     */
-    public static final String LOG_PERSON_CREATE = "Person entity is create, object: {}";
-    public static final String LOG_PERSON_UPDATE = "Person entity is update, object: {}";
-    public static final String LOG_PERSON_ARCHIVED = "Person entity is archived, object: {}";
-    public static final String LOG_READ_ALL_PERSONS = "Read all persons";
-    public static final String LOG_READ_PERSONS_BY_ROLE = "Received persons by role: {}";
-    public static final String LOG_READ_ARCHIVE_PERSONS = "Received archive persons";
-    public static final String LOG_READ_PERSON_BY_ID = "Received person by id: {}";
-    public static final String LOG_READ_PERSON_BY_EMAIL = "Received person by email: {}";
-    public static final String LOG_READ_DISHES_BY_TYPE = "Received dishes by type: {}";
-    public static final String LOG_READ_ARCHIVE_DISHES = "Received archive dishes";
-    public static final String LOG_DISH_CREATE = "Dish entity is create, object: {}";
-    public static final String LOG_READ_ALL_DISHES = "Read all dishes";
-    public static final String LOG_READ_DISHES_BY_NAME = "Received dishes by name: {}";
-    public static final String LOG_READ_DISHES_BY_ID = "Received dishes by id: {}";
-    public static final String LOG_DISH_UPDATE = "Dish entity is update, object: {}";
-    public static final String LOG_DISH_ARCHIVED = "Dish entity is archived, object: {}";
-    public static final String LOG_PASS_CHECKED = "Password is checked";
-    public static final String LOG_PASS_GENERATED = "Password is generated";
-    public static final String LOG_ERR_PASS_GENERATED = "Password not generated";
-    public static final String LOG_SALT_GENERATED = "Salt is generated";
-    public static final String LOG_ERR_SALT_GENERATED = "Salt not generated";
-    public static final String LOG_ERR_EXCEPTION = "EXCEPTION: {}";
-    public static final String LOG_ERR_NOT_FOUND_PERSON = "The requested person was not found";
-    public static final String WRITE_TO_US = "Write to us: ";
-    public static final String LOG_ERR_SEND_MESSAGE = "Message not send";
-    public static final String LOG_SEND_MESSAGE = "Message is send, email: {}";
+    public static final String PERSON_DELETE = "update Person person set person.deleted = 1 where person.id=:id";
 
     private Constants() {
     }

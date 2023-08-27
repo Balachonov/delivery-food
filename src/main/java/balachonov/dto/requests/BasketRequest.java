@@ -1,7 +1,9 @@
 package balachonov.dto.requests;
 
-import balachonov.dto.responses.DishDtoResponse;
+import balachonov.dto.responses.DishResponse;
 import balachonov.entities.Person;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,10 +16,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BasketDtoRequest {
+public class BasketRequest {
+
+    @NotBlank
     private Person owner;
-    private List<DishDtoResponse> dishesDto;
+
+    @NotEmpty
+    private List<DishResponse> dishesDto;
+
+    @NotBlank
     private String description;
+
     private LocalDateTime orderTime;
+
     private Integer closed;
 }

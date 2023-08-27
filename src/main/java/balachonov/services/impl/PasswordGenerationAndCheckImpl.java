@@ -1,5 +1,6 @@
 package balachonov.services.impl;
 
+import balachonov.exceptions.PasswordGenerationAndCheckException;
 import balachonov.services.PasswordGenerationAndCheck;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class PasswordGenerationAndCheckImpl implements PasswordGenerationAndChec
             byte[] bytes = f.generateSecret(spec).getEncoded();
             return new String(bytes, CODE);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex);
+            throw new PasswordGenerationAndCheckException(ex.getMessage());
         }
     }
 
@@ -48,7 +49,7 @@ public class PasswordGenerationAndCheckImpl implements PasswordGenerationAndChec
             random.nextBytes(salt);
             return new String(salt, CODE);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex);
+            throw new PasswordGenerationAndCheckException(ex.getMessage());
         }
     }
 }

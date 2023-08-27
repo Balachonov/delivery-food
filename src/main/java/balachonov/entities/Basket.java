@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,12 +18,13 @@ import static balachonov.util.Constants.*;
 @Builder
 @Entity
 @Table(name = BASKETS)
-@Where(clause = CLOSED_ZERO)
 public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = BASKET_ID, unique = true)
+    @Column(name = BASKET_ID,
+            unique = true,
+            updatable = false)
     private UUID id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -37,7 +37,8 @@ public class Basket {
             inverseJoinColumns = @JoinColumn(name = DISH_ID))
     private List<Dish> dishes;
 
-    @Column(name = DESCRIPTION)
+    @Column(name = DESCRIPTION,
+            nullable = false)
     private String description;
 
     @Column(name = ORDER_TIME)

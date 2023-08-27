@@ -1,14 +1,12 @@
 package balachonov.entities;
 
 import balachonov.enums.DishType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -22,28 +20,34 @@ import static jakarta.persistence.EnumType.STRING;
 @Builder
 @Entity
 @Table(name = DISHES)
-@Where(clause = DELETED_ZERO)
 public class Dish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = DISH_ID, unique = true)
+    @Column(name = DISH_ID,
+            unique = true,
+            updatable = false)
     private UUID id;
 
-    @Column(name = NAME, nullable = false)
+    @Column(name = NAME,
+            nullable = false,
+            length = 50)
     private String name;
 
-    @Column(name = PRICE, nullable = false)
+    @Column(name = PRICE,
+            nullable = false)
     private BigDecimal price;
 
-    @Column(name = DESCRIPTION, nullable = false)
+    @Column(name = DESCRIPTION,
+            nullable = false)
     private String description;
 
     @Enumerated(STRING)
-    @Column(name = TYPE, nullable = false)
+    @Column(name = TYPE,
+            nullable = false)
     private DishType type;
 
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = BASKET_DISH,
             joinColumns = @JoinColumn(name = DISH_ID),
             inverseJoinColumns = @JoinColumn(name = BASKET_ID))

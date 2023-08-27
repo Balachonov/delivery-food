@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Where;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,17 +25,24 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = PERSON_ID, unique = true,
+    @Column(name = PERSON_ID,
+            unique = true,
             updatable = false)
     private UUID id;
 
-    @Column(name = FIRST_NAME, nullable = false)
+    @Column(name = FIRST_NAME,
+            nullable = false,
+            length = 20)
     private String firstName;
 
-    @Column(name = LAST_NAME, nullable = false)
+    @Column(name = LAST_NAME,
+            nullable = false,
+            length = 20)
     private String lastName;
 
-    @Column(name = EMAIL, unique = true, nullable = false)
+    @Column(name = EMAIL,
+            unique = true,
+            nullable = false)
     private String email;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -45,14 +51,16 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = ADDRESS_ID))
     private List<Address> addresses;
 
-    @Column(name = PASSWORD, nullable = false)
+    @Column(name = PASSWORD,
+            nullable = false)
     private String password;
 
     @Column(name = SALT)
     private String salt;
 
     @Enumerated(STRING)
-    @Column(name = ROLE, nullable = false)
+    @Column(name = ROLE,
+            nullable = false)
     private PersonRole role;
 
     @OneToMany(mappedBy = PERSON,

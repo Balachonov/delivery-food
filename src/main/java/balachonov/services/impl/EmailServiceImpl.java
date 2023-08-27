@@ -16,29 +16,21 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendSuccessfulBasketMail(String email) {
-        try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom(COMPANY_GMAIL);
             mailMessage.setTo(email);
             mailMessage.setText(MESSAGE_BASKET);
             mailMessage.setSubject(SUBJECT_BASKET);
             EMAIL_SENDER.send(mailMessage);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
     }
 
     @Override
     public void sendSuccessfulRegistrationMail(String email) {
-        try {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom(COMPANY_GMAIL);
             mailMessage.setTo(email);
             mailMessage.setText(MESSAGE_SUCCESSFUL_REGISTRATION);
             mailMessage.setSubject(SUBJECT_SUCCESSFUL_REGISTRATION);
             EMAIL_SENDER.send(mailMessage);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
     }
 }

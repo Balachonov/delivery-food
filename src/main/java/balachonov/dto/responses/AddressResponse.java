@@ -5,20 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 import java.util.UUID;
 
 @Data
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AddressDtoResponse {
+public class AddressResponse {
+
     private UUID id;
     private City city;
     private String street;
     private String house;
     private String apartment;
-    private List<PersonDtoResponse> personsDto;
+    private List<PersonResponse> personsDto;
     private Integer deleted;
 }

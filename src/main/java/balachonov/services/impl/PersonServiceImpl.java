@@ -1,7 +1,7 @@
 package balachonov.services.impl;
 
-import balachonov.dto.requests.PersonDtoRequest;
-import balachonov.dto.responses.PersonDtoResponse;
+import balachonov.dto.requests.PersonRequest;
+import balachonov.dto.responses.PersonResponse;
 import balachonov.enums.PersonRole;
 import balachonov.mappers.PersonMapperDto;
 import balachonov.repositories.PersonRepository;
@@ -29,33 +29,33 @@ public class PersonServiceImpl implements PersonService {
     private final PersonMapperDto PERSON_MAPPER;
 
     @Override
-    public PersonDtoResponse savePerson(PersonDtoRequest personDtoRequest) {
+    public PersonResponse savePerson(PersonRequest personDtoRequest) {
         String salt = PASSWORD_SERVICE.generationSalt();
-        PersonDtoResponse personDtoResponse = PERSON_MAPPER.createPersonDtoResponse(personDtoRequest);
-        personDtoResponse.setSalt(salt);
-        personDtoResponse.setPassword(PASSWORD_SERVICE.getHashPassword(personDtoRequest.getPassword(), salt));
-        personDtoResponse.setRole(PersonRole.USER);
-        personDtoResponse.setDeleted(0);
+        PersonResponse personDtoResponse = PERSON_MAPPER.createPersonDtoResponse(personDtoRequest);
+        personDtoResponse.setSalt(salt)
+                .setPassword(PASSWORD_SERVICE.getHashPassword(personDtoRequest.getPassword(), salt))
+                .setRole(PersonRole.USER)
+                .setDeleted(0);
         EMAIL_SERVICE.sendSuccessfulRegistrationMail(personDtoRequest.getEmail());
         return PERSON_MAPPER.toDto(PERSON_REPOSITORY.save(PERSON_MAPPER.toEntity(personDtoResponse)));
     }
 
     @Override
-    public PersonDtoResponse readPersonById(UUID id) {
+    public PersonResponse readPersonById(UUID id) {
         return PERSON_REPOSITORY.findById(id)
                 .map(PERSON_MAPPER::toDto)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_ID, id)));
     }
 
     @Override
-    public PersonDtoResponse readPersonByEmail(String email) {
+    public PersonResponse readPersonByEmail(String email) {
         return PERSON_REPOSITORY.findByEmail(email)
                 .map(PERSON_MAPPER::toDto)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_EMAIL, email)));
     }
 
     @Override
-    public List<PersonDtoResponse> getAllActivePersons() {
+    public List<PersonResponse> getAllActivePersons() {
         return getAllPersons()
                 .stream()
                 .filter(personDtoResponse -> personDtoResponse.getDeleted() == 1)
@@ -63,7 +63,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonDtoResponse> getAllPersons() {
+    public List<PersonResponse> getAllPersons() {
         return PERSON_REPOSITORY.findAll()
                 .stream()
                 .map(PERSON_MAPPER::toDto)
@@ -71,7 +71,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonDtoResponse> readArchivePersons() {
+    public List<PersonResponse> readArchivePersons() {
         return getAllPersons()
                 .stream()
                 .filter(personDtoResponse -> personDtoResponse.getDeleted() == 0)
@@ -79,7 +79,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDtoResponse deletePerson(UUID id) {
+    public PersonResponse deletePerson(UUID id) {
         return PERSON_REPOSITORY.deletePerson(id)
                 .map(PERSON_MAPPER::toDto)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_ID, id)));

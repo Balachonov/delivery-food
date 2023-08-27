@@ -1,11 +1,10 @@
 package balachonov.mappers;
 
-import balachonov.dto.responses.DishDtoResponse;
+import balachonov.dto.responses.DishResponse;
 import balachonov.entities.Dish;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
 
 import static balachonov.util.Constants.*;
 
@@ -13,9 +12,9 @@ import static balachonov.util.Constants.*;
 public interface DishMapperDto {
 
     @Mapping(source = DISH_BASKETS, target = BASKETS_DTO)
-    DishDtoResponse toDto(Dish dish);
+    DishResponse toDto(Dish dish);
 
-    Dish toEntity(DishDtoResponse dishDTO);
+    Dish toEntity(DishResponse dishDTO);
 
-    void updateEntity(DishDtoResponse dishDTO, @MappingTarget Dish dish);
+    void updateEntity(DishResponse dishDTO, @MappingTarget Dish dish);
 }

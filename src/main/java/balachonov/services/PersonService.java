@@ -1,25 +1,24 @@
 package balachonov.services;
 
-import balachonov.dto.requests.PersonDtoRequest;
-import balachonov.dto.responses.PersonDtoResponse;
-import org.springframework.stereotype.Service;
+import balachonov.dto.requests.PersonRequest;
+import balachonov.dto.responses.PersonResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
+
 public interface PersonService {
-    PersonDtoResponse savePerson(PersonDtoRequest personDtoRequest);
+    PersonResponse savePerson(PersonRequest personDtoRequest);
 
-    PersonDtoResponse readPersonById(UUID id);
+    PersonResponse readPersonById(UUID id);
 
-    PersonDtoResponse readPersonByEmail(String email);
+    PersonResponse readPersonByEmail(String email);
 
-    List<PersonDtoResponse> getAllActivePersons();
+    List<PersonResponse> getAllActivePersons();
 
-    List<PersonDtoResponse> getAllPersons();
+    List<PersonResponse> getAllPersons();
 
-    List<PersonDtoResponse> readArchivePersons();
+    List<PersonResponse> readArchivePersons();
 
-    PersonDtoResponse deletePerson(UUID id);
+    PersonResponse deletePerson(UUID id);
 }

@@ -1,23 +1,21 @@
 package balachonov.services;
 
-import balachonov.dto.requests.BasketDtoRequest;
-import balachonov.dto.responses.BasketDtoResponse;
-import org.springframework.stereotype.Service;
+import balachonov.dto.requests.BasketRequest;
+import balachonov.dto.responses.BasketResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
 public interface BasketService {
-    BasketDtoResponse saveBasket(BasketDtoRequest basketDtoRequest);
+    BasketResponse saveBasket(BasketRequest basketDtoRequest);
 
-    BasketDtoResponse readBasketById(UUID id);
+    BasketResponse readBasketById(UUID id);
 
-    List<BasketDtoResponse> getAllActiveBaskets();
+    List<BasketResponse> getAllActiveBaskets();
 
-    List<BasketDtoResponse> getAllBaskets();
+    List<BasketResponse> getAllBaskets();
 
-    List<BasketDtoResponse> readArchiveBaskets();
+    List<BasketResponse> readArchiveBaskets();
 
-    BasketDtoResponse deleteBasket(String id);
+    BasketResponse deleteBasket(String id);
 }

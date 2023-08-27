@@ -1,8 +1,9 @@
 package balachonov.dto.requests;
 
-import balachonov.dto.responses.AddressDtoResponse;
-import balachonov.dto.responses.BasketDtoResponse;
+import balachonov.dto.responses.AddressResponse;
+import balachonov.dto.responses.BasketResponse;
 import balachonov.enums.PersonRole;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,13 +15,27 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PersonDtoRequest {
+public class PersonRequest {
+
+    @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
+
+    @NotBlank
+    @Email
     private String email;
-    private List<AddressDtoResponse> addressesDto;
+
+    private List<AddressResponse> addressesDto;
+
+    @NotBlank
+    @Size(min = 8)
     private String password;
+
     private PersonRole role;
-    private List<BasketDtoResponse> basketsDto;
+
+    private List<BasketResponse> basketsDto;
+
     private Integer deleted;
 }
