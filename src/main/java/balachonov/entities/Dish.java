@@ -25,7 +25,6 @@ public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = DISH_ID,
-            unique = true,
             updatable = false)
     private UUID id;
 
@@ -51,12 +50,5 @@ public class Dish {
     @JoinTable(name = BASKET_DISH,
             joinColumns = @JoinColumn(name = DISH_ID),
             inverseJoinColumns = @JoinColumn(name = BASKET_ID))
-    private List<Basket> baskets;
-
-    @Column(name = DELETED)
-    private Integer deleted = 0;
-
-    public void setDeleted() {
-        this.deleted = 1;
-    }
+    private List<Order> orders;
 }

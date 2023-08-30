@@ -19,10 +19,14 @@ import java.util.UUID;
 public class DishResponse {
 
     private UUID id;
+
     private String name;
+
     private BigDecimal price;
+
     private String description;
+
     private DishType type;
-    private List<BasketResponse> basketsDto;
-    private Integer deleted;
+
+    private List<OrderResponse> orderResponses;
 }

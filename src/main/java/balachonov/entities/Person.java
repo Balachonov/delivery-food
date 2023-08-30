@@ -26,7 +26,6 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = PERSON_ID,
-            unique = true,
             updatable = false)
     private UUID id;
 
@@ -45,18 +44,13 @@ public class Person {
             nullable = false)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = PERSON_ADDRESS,
-            joinColumns = @JoinColumn(name = PERSON_ID),
-            inverseJoinColumns = @JoinColumn(name = ADDRESS_ID))
-    private List<Address> addresses;
+    @Column(name = TELEPHONE,
+            nullable = false)
+    private String telephone;
 
     @Column(name = PASSWORD,
             nullable = false)
     private String password;
-
-    @Column(name = SALT)
-    private String salt;
 
     @Enumerated(STRING)
     @Column(name = ROLE,
@@ -66,12 +60,5 @@ public class Person {
     @OneToMany(mappedBy = PERSON,
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private List<Basket> baskets;
-
-    @Column(name = DELETED)
-    private Integer deleted;
-
-    public void setDeleted() {
-        this.deleted = 1;
-    }
+    private List<Order> orders;
 }

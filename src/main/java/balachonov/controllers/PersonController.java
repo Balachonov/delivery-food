@@ -17,40 +17,35 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PersonController {
 
-    private final PersonService PERSON_SERVICE;
+    private final PersonService personService;
 
     @PostMapping(value = "/person")
-    public PersonResponse saveUser(@Valid @RequestBody PersonRequest personRequest) {
-        return PERSON_SERVICE.savePerson(personRequest);
+    public PersonResponse savePerson(@Valid @RequestBody PersonRequest personRequest) {
+        return personService.savePerson(personRequest);
     }
 
     @GetMapping(value = "/personById/{id}")
-    public PersonResponse readPersonById(@PathVariable UUID id) {
-        return PERSON_SERVICE.readPersonById(id);
+    public PersonResponse getPersonById(@PathVariable UUID id) {
+        return personService.getPersonById(id);
     }
 
     @GetMapping(value = "/personByEmail/{email}")
-    public PersonResponse readPersonById(@PathVariable String email) {
-        return PERSON_SERVICE.readPersonByEmail(email);
+    public PersonResponse getPersonByEmail(@PathVariable String email) {
+        return personService.getPersonByEmail(email);
+    }
+
+    @PutMapping(value = "/person/{id}")
+    public PersonResponse update(@Valid @RequestBody PersonRequest personRequest, @PathVariable UUID id) {
+        return personService.updatePerson(personRequest, id);
+    }
+
+    @DeleteMapping(value = "/person/{id}")
+    public void delete(@PathVariable UUID id) {
+        personService.deletePerson(id);
     }
 
     @GetMapping(value = "/persons")
     public List<PersonResponse> getPersons() {
-        return PERSON_SERVICE.getAllPersons();
-    }
-
-    @GetMapping(value = "/personsArchive")
-    public List<PersonResponse> readArchivePersons() {
-        return PERSON_SERVICE.readArchivePersons();
-    }
-
-    @GetMapping(value = "/personsActive")
-    public List<PersonResponse> getAllActivePersons() {
-        return PERSON_SERVICE.getAllActivePersons();
-    }
-
-    @PutMapping(value = "/person/{id}")
-    public PersonResponse deletePerson(@PathVariable UUID id) {
-        return PERSON_SERVICE.deletePerson(id);
+        return personService.getPersons();
     }
 }

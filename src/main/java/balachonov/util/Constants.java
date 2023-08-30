@@ -17,21 +17,11 @@ public final class Constants {
     public static final String PERSON_ID = "PERSON_ID";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
+    public static final String TELEPHONE = "telephone";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String SALT = "salt";
     public static final String ROLE = "role";
-
-    /**
-     * Constants for address
-     */
-    public static final String ADDRESSES = "addresses";
-    public static final String ADDRESS_ID = "ADDRESS_ID";
-    public static final String CITY = "CITY";
-    public static final String STREET = "STREET";
-    public static final String HOUSE = "HOUSE";
-    public static final String APARTMENT = "APARTMENT";
-    public static final String PERSON_ADDRESS = "PERSON_ADDRESS";
 
     /**
      * Constants for basket
@@ -41,8 +31,6 @@ public final class Constants {
     public static final String BASKET_DISH = "BASKET_DISH";
     public static final String DESCRIPTION = "DESCRIPTION";
     public static final String ORDER_TIME = "ORDER_TIME";
-    public static final String CLOSED_ZERO = "CLOSED = 0";
-    public static final String CLOSED = "CLOSED";
 
     /**
      * Constants for dish
@@ -54,41 +42,31 @@ public final class Constants {
     public static final String TYPE = "type";
 
     /**
-     * Constants for the PasswordGenerationAndCheckImpl
-     */
-    public static final String ALGORITHM_PASS = "PBKDF2WithHmacSHA1";
-    public static final String ALGORITHM_SALT = "SHA1PRNG";
-    public static final String CODE = "UTF_16";
-
-    /**
      * Constants for DTO mappers
      */
-    public static final String ADDRESS_PERSONS ="address.persons";
-    public static final String BASKET_DISHES = "basket.dishes";
-    public static final String DISH_BASKETS = "dish.baskets";
-    public static final String PERSON_ADDRESSES = "person.addresses";
-    public static final String PERSON_BASKETS = "person.baskets";
-    public static final String PERSONS_DTO = "personsDto";
-    public static final String DISHES_DTO = "dishesDto";
-    public static final String BASKETS_DTO = "basketsDto";
-    public static final String ADDRESSES_DTO = "addressesDto";
+    public static final String ORDER_DISHES = "order.dishes";
+    public static final String DISH_ORDERS = "dish.orders";
+    public static final String PERSON_ORDERS = "person.orders";
+    public static final String DISH_RESPONSES = "dishResponses";
+    public static final String ORDER_RESPONSES = "orderResponses";
 
     /**
      * Constants for email sender
      */
-    public static final String COMPANY_GMAIL = "el.grilgo@gmail.com";
-    public static final String MESSAGE_BASKET = "Your order has been accepted and is being prepared." +
+    public static final String MESSAGE_ORDER = "Your order has been accepted and is being prepared." +
             " Thank you for choosing us";
-    public static final String SUBJECT_BASKET = "Your order in the EL'Grillgo has been confirmed";
+    public static final String SUBJECT_ORDER = "Your order in the EL'Grillgo has been confirmed";
     public static final String SUBJECT_SUCCESSFUL_REGISTRATION = "Successful registration";
-    public static final String MESSAGE_SUCCESSFUL_REGISTRATION = "Thank you for choosing food delivery from our" +
-            " campaign. We will feed you.";
+    public static final String MESSAGE_SUCCESSFUL_REGISTRATION = "Я тебя люблю";
 
     /**
      * Constants for service exception
      */
     public static final String PERSON_NOT_FOUND_BY_ID = "Person with id - %s is not found";
     public static final String PERSON_NOT_FOUND_BY_EMAIL = "Person with email - %s is not found";
+    public static final String ORDER_NOT_FOUND_BY_ID = "Order with id - %s is not found";
+    public static final String DISH_NOT_FOUND_BY_ID = "Dish with id - %s is not found";
+    public static final String DISH_NOT_FOUND_BY_NAME = "Dish with name - %s is not found";
     public static final String LOG_ERR_EXCEPTION = "EXCEPTION: {}";
     public static final String ERR_VALID_MESSAGE = "Field: %s. Error: %s";
     public static final String ERR_PASSWORD_GENERATION_MESSAGE = "Oops. There are problems on the server. We are " +

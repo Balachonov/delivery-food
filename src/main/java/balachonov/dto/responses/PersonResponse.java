@@ -18,13 +18,18 @@ import java.util.UUID;
 public class PersonResponse {
 
     private UUID id;
+
     private String firstName;
+
     private String lastName;
+
     private String email;
-    private List<AddressResponse> addressesDto;
+
+    private String telephone;
+
     private String password;
-    private String salt;
+
     private PersonRole role;
-    private List<BasketResponse> basketsDto;
-    private Integer deleted;
+
+    private List<OrderResponse> orderResponses;
 }

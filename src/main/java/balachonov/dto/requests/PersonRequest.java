@@ -1,15 +1,15 @@
 package balachonov.dto.requests;
 
-import balachonov.dto.responses.AddressResponse;
-import balachonov.dto.responses.BasketResponse;
-import balachonov.enums.PersonRole;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -27,15 +27,12 @@ public class PersonRequest {
     @Email
     private String email;
 
-    private List<AddressResponse> addressesDto;
+    @NotBlank
+    private String telephone;
 
     @NotBlank
     @Size(min = 8)
     private String password;
 
-    private PersonRole role;
-
-    private List<BasketResponse> basketsDto;
-
-    private Integer deleted;
+    private List<OrderRequest> orderRequests;
 }

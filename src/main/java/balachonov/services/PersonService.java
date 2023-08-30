@@ -8,17 +8,16 @@ import java.util.UUID;
 
 
 public interface PersonService {
-    PersonResponse savePerson(PersonRequest personDtoRequest);
 
-    PersonResponse readPersonById(UUID id);
+    PersonResponse savePerson(PersonRequest personRequest);
 
-    PersonResponse readPersonByEmail(String email);
+    PersonResponse getPersonById(UUID id);
 
-    List<PersonResponse> getAllActivePersons();
+    PersonResponse getPersonByEmail(String email);
 
-    List<PersonResponse> getAllPersons();
+    PersonResponse updatePerson(PersonRequest personRequest, UUID id);
 
-    List<PersonResponse> readArchivePersons();
+    void deletePerson(UUID id);
 
-    PersonResponse deletePerson(UUID id);
+    List<PersonResponse> getPersons();
 }

@@ -1,6 +1,5 @@
 package balachonov.dto.requests;
 
-import balachonov.dto.responses.BasketResponse;
 import balachonov.enums.DishType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,10 +26,8 @@ public class DishRequest {
     @NotBlank
     private String description;
 
-    @NotNull
+    @NotBlank
     private DishType type;
 
-    private List<BasketResponse> basketsDto;
-
-    private Integer deleted;
+    private List<OrderRequest> orderRequests;
 }

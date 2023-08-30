@@ -16,12 +16,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BasketResponse {
+public class OrderResponse {
 
     private UUID id;
-    private Person owner;
-    private List<DishResponse> dishesDto;
+
+    private PersonResponse owner;
+
+    private List<DishResponse> dishResponses;
+
     private String description;
+
     private LocalDateTime orderTime;
-    private Integer closed;
 }

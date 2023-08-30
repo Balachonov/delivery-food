@@ -16,18 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BasketRequest {
+public class OrderRequest {
 
     @NotBlank
     private Person owner;
 
     @NotEmpty
-    private List<DishResponse> dishesDto;
+    private List<DishRequest> dishRequest;
 
     @NotBlank
     private String description;
 
     private LocalDateTime orderTime;
-
-    private Integer closed;
 }

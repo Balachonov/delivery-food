@@ -2,6 +2,7 @@ package balachonov.services.impl;
 
 import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
+import balachonov.entities.Person;
 import balachonov.enums.PersonRole;
 import balachonov.mappers.PersonMapperDto;
 import balachonov.repositories.PersonRepository;
@@ -23,65 +24,54 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    private final EmailService EMAIL_SERVICE;
-    private final PersonRepository PERSON_REPOSITORY;
-    private final PasswordGenerationAndCheck PASSWORD_SERVICE;
-    private final PersonMapperDto PERSON_MAPPER;
+    private final EmailService emailService;
+    private final PersonRepository personRepository;
+    private final PasswordGenerationAndCheck passwordService;
+    private final PersonMapperDto personMapper;
 
     @Override
-    public PersonResponse savePerson(PersonRequest personDtoRequest) {
-        String salt = PASSWORD_SERVICE.generationSalt();
-        PersonResponse personDtoResponse = PERSON_MAPPER.createPersonDtoResponse(personDtoRequest);
-        personDtoResponse.setSalt(salt)
-                .setPassword(PASSWORD_SERVICE.getHashPassword(personDtoRequest.getPassword(), salt))
-                .setRole(PersonRole.USER)
-                .setDeleted(0);
-        EMAIL_SERVICE.sendSuccessfulRegistrationMail(personDtoRequest.getEmail());
-        return PERSON_MAPPER.toDto(PERSON_REPOSITORY.save(PERSON_MAPPER.toEntity(personDtoResponse)));
+    public PersonResponse savePerson(PersonRequest personRequest) {
+        Person person = personMapper.mapToPerson(personRequest);
+        person.setPassword(passwordService.getHashPassword(personRequest.getPassword()))
+                .setRole(PersonRole.USER);
+        emailService.sendSuccessfulRegistrationMail(person.getEmail());
+        person = personRepository.save(person);
+        return personMapper.mapToPersonResponse(person);
     }
 
     @Override
-    public PersonResponse readPersonById(UUID id) {
-        return PERSON_REPOSITORY.findById(id)
-                .map(PERSON_MAPPER::toDto)
+    public PersonResponse getPersonById(UUID id) {
+        return personRepository.findById(id)
+                .map(personMapper::mapToPersonResponse)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_ID, id)));
     }
 
     @Override
-    public PersonResponse readPersonByEmail(String email) {
-        return PERSON_REPOSITORY.findByEmail(email)
-                .map(PERSON_MAPPER::toDto)
+    public PersonResponse getPersonByEmail(String email) {
+        return personRepository.findByEmail(email)
+                .map(personMapper::mapToPersonResponse)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_EMAIL, email)));
     }
 
     @Override
-    public List<PersonResponse> getAllActivePersons() {
-        return getAllPersons()
-                .stream()
-                .filter(personDtoResponse -> personDtoResponse.getDeleted() == 1)
-                .toList();
-    }
-
-    @Override
-    public List<PersonResponse> getAllPersons() {
-        return PERSON_REPOSITORY.findAll()
-                .stream()
-                .map(PERSON_MAPPER::toDto)
-                .toList();
-    }
-
-    @Override
-    public List<PersonResponse> readArchivePersons() {
-        return getAllPersons()
-                .stream()
-                .filter(personDtoResponse -> personDtoResponse.getDeleted() == 0)
-                .toList();
-    }
-
-    @Override
-    public PersonResponse deletePerson(UUID id) {
-        return PERSON_REPOSITORY.deletePerson(id)
-                .map(PERSON_MAPPER::toDto)
+    public PersonResponse updatePerson(PersonRequest personRequest, UUID id) {
+        Person person = personRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_ID, id)));
+        personMapper.updatePerson(personRequest, person);
+        person = personRepository.save(person);
+        return personMapper.mapToPersonResponse(person);
+    }
+
+    @Override
+    public void deletePerson(UUID id) {
+        personRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PersonResponse> getPersons() {
+        return personRepository.findAll()
+                .stream()
+                .map(personMapper::mapToPersonResponse)
+                .toList();
     }
 }

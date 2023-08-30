@@ -12,25 +12,25 @@ import static balachonov.util.Constants.*;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-    private final JavaMailSender EMAIL_SENDER;
+    private final JavaMailSender mailSender;
 
     @Override
-    public void sendSuccessfulBasketMail(String email) {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom(COMPANY_GMAIL);
-            mailMessage.setTo(email);
-            mailMessage.setText(MESSAGE_BASKET);
-            mailMessage.setSubject(SUBJECT_BASKET);
-            EMAIL_SENDER.send(mailMessage);
+    public void sendSuccessfulOrderMail(String email) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("${spring.mail.username}");
+        mailMessage.setTo(email);
+        mailMessage.setText(MESSAGE_ORDER);
+        mailMessage.setSubject(SUBJECT_ORDER);
+        mailSender.send(mailMessage);
     }
 
     @Override
     public void sendSuccessfulRegistrationMail(String email) {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom(COMPANY_GMAIL);
-            mailMessage.setTo(email);
-            mailMessage.setText(MESSAGE_SUCCESSFUL_REGISTRATION);
-            mailMessage.setSubject(SUBJECT_SUCCESSFUL_REGISTRATION);
-            EMAIL_SENDER.send(mailMessage);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("${spring.mail.username}");
+        mailMessage.setTo(email);
+        mailMessage.setText(MESSAGE_SUCCESSFUL_REGISTRATION);
+        mailMessage.setSubject(SUBJECT_SUCCESSFUL_REGISTRATION);
+        mailSender.send(mailMessage);
     }
 }

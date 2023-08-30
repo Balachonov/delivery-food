@@ -1,6 +1,5 @@
 package balachonov.controllers;
 
-import balachonov.exceptions.PasswordGenerationAndCheckException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLException;
@@ -19,37 +18,31 @@ import static java.lang.String.format;
 public class ExceptionHandlerController {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseStatusException handleUserNotFoundException(EntityNotFoundException ex) {
-        log.warn(LOG_ERR_EXCEPTION, ex.getMessage());
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+    public ResponseStatusException handleUserNotFoundException(EntityNotFoundException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage(), exception);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseStatusException handleValidationException(MethodArgumentNotValidException ex) {
-        log.warn(LOG_ERR_EXCEPTION, ex.getMessage());
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, getMessageForValidException(ex), ex);
+    public ResponseStatusException handleValidationException(MethodArgumentNotValidException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, getMessageForValidException(exception), exception);
     }
 
     @ExceptionHandler(PSQLException.class)
-    public ResponseStatusException handlePSQLException(PSQLException ex) {
-        log.warn(LOG_ERR_EXCEPTION, ex.getMessage());
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), ex);
-    }
-
-    @ExceptionHandler(PasswordGenerationAndCheckException.class)
-    public ResponseStatusException handlePasswordGenerationAndCheckException(PasswordGenerationAndCheckException ex) {
-        log.warn(LOG_ERR_EXCEPTION, ex.getMessage());
-        return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ERR_PASSWORD_GENERATION_MESSAGE, ex);
+    public ResponseStatusException handlePSQLException(PSQLException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), exception);
     }
 
     @ExceptionHandler(MailException.class)
-    public void handleMailException(MailException ex) {
-        log.warn(LOG_ERR_EXCEPTION, ex.getMessage());
+    public void handleMailException(MailException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
     }
 
-    private String getMessageForValidException(MethodArgumentNotValidException ex) {
-        String field = ex.getBindingResult().getFieldError().getField();
-        String defaultMessage = ex.getBindingResult().getFieldError().getDefaultMessage();
+    private String getMessageForValidException(MethodArgumentNotValidException exception) {
+        String field = exception.getBindingResult().getFieldError().getField();
+        String defaultMessage = exception.getBindingResult().getFieldError().getDefaultMessage();
         return format(ERR_VALID_MESSAGE, field, defaultMessage);
     }
 }

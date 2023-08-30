@@ -1,9 +1,9 @@
 package balachonov.repositories;
 
-import balachonov.entities.Address;
+import balachonov.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface AddressRepository extends JpaRepository<Address, UUID> {
+public interface OrderRepository extends JpaRepository<Order, UUID> {
 }

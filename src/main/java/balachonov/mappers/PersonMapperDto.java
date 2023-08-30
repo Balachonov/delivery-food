@@ -9,26 +9,28 @@ import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 
 import static balachonov.util.Constants.*;
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
+
 @Component
-@Mapper(uses = {AddressMapperDto.class, BasketMapperDto.class}, componentModel = SPRING)
+@Mapper(uses = {OrderMapperDto.class},
+        componentModel = SPRING,
+        nullValuePropertyMappingStrategy = IGNORE)
 public interface PersonMapperDto {
 
-
     @Mapping(target = PASSWORD, ignore = true)
-    @Mapping(target = SALT, ignore = true)
     @Mapping(target = ROLE, ignore = true)
-    @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES_DTO)
-    @Mapping(source = PERSON_BASKETS, target = BASKETS_DTO)
-    PersonResponse toDto(Person person);
+    @Mapping(source = PERSON_ORDERS, target = ORDER_RESPONSES)
+    PersonResponse mapToPersonResponse(Person person);
 
-    PersonResponse createPersonDtoResponse(PersonRequest personDtoRequest);
+    PersonResponse mapToPersonResponse(PersonRequest personRequest);
 
     @DoIgnore
-    @Mapping(source = PERSON_ADDRESSES, target = ADDRESSES_DTO)
-    @Mapping(source = PERSON_BASKETS, target = BASKETS_DTO)
-    PersonResponse toFullDto(Person person);
+    @Mapping(source = PERSON_ORDERS, target = ORDER_RESPONSES)
+    PersonResponse mapToFullPersonResponse(Person person);
 
-    Person toEntity(PersonResponse personDTO);
+    Person mapToPerson(PersonResponse personResponse);
 
-    void updateEntity(PersonResponse personDTO, @MappingTarget Person person);
+    Person mapToPerson(PersonRequest personRequest);
+
+    void updatePerson(PersonRequest personRequest, @MappingTarget Person person);
 }

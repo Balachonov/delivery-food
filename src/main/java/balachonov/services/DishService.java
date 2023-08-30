@@ -7,17 +7,16 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DishService {
-    DishResponse saveDish(DishRequest dishDtoRequest);
 
-    DishResponse readDishById(UUID id);
+    DishResponse saveDish(DishRequest dishRequest);
 
-    DishResponse readDishByName(String name);
+    DishResponse getDishById(UUID id);
 
-    List<DishResponse> getAllActiveDishes();
+    DishResponse getDishByName(String name);
 
-    List<DishResponse> getAllDish();
+    List<DishResponse> getDishes();
 
-    List<DishResponse> readArchiveDishes();
+    DishResponse updateDish(DishRequest dishRequest, UUID id);
 
-    DishResponse deleteDish(String id);
+    void deleteDish(UUID id);
 }

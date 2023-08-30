@@ -18,12 +18,11 @@ import static balachonov.util.Constants.*;
 @Builder
 @Entity
 @Table(name = BASKETS)
-public class Basket {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = BASKET_ID,
-            unique = true,
             updatable = false)
     private UUID id;
 
@@ -41,13 +40,7 @@ public class Basket {
             nullable = false)
     private String description;
 
-    @Column(name = ORDER_TIME)
+    @Column(name = ORDER_TIME,
+            nullable = false)
     private LocalDateTime orderTime;
-
-    @Column(name = CLOSED)
-    private Integer closed = 0;
-
-    public void setClosed() {
-        this.closed = 1;
-    }
 }
