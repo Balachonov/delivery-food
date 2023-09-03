@@ -1,5 +1,6 @@
 package balachonov.services.impl;
 
+import balachonov.aspects.anotations.ExecutionTimeLog;
 import balachonov.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -16,21 +17,24 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendSuccessfulOrderMail(String email) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom("${spring.mail.username}");
-        mailMessage.setTo(email);
-        mailMessage.setText(MESSAGE_ORDER);
-        mailMessage.setSubject(SUBJECT_ORDER);
+        SimpleMailMessage mailMessage = getSimpleMailMessage(email);
+        mailMessage.setText(MESSAGE_MAIL_ORDER);
+        mailMessage.setSubject(SUBJECT_MAIL_ORDER);
         mailSender.send(mailMessage);
     }
 
     @Override
     public void sendSuccessfulRegistrationMail(String email) {
+        SimpleMailMessage mailMessage = getSimpleMailMessage(email);
+        mailMessage.setText(MESSAGE_MAIL_REGISTRATION);
+        mailMessage.setSubject(SUBJECT_MAIL_REGISTRATION);
+        mailSender.send(mailMessage);
+    }
+
+    private SimpleMailMessage getSimpleMailMessage(String email) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("${spring.mail.username}");
         mailMessage.setTo(email);
-        mailMessage.setText(MESSAGE_SUCCESSFUL_REGISTRATION);
-        mailMessage.setSubject(SUBJECT_SUCCESSFUL_REGISTRATION);
-        mailSender.send(mailMessage);
+        return mailMessage;
     }
 }

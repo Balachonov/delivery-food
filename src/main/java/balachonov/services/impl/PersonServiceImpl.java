@@ -24,10 +24,10 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    private final EmailService emailService;
-    private final PersonRepository personRepository;
-    private final PasswordGenerationAndCheck passwordService;
     private final PersonMapperDto personMapper;
+    private final EmailService emailService;
+    private final PasswordGenerationAndCheck passwordService;
+    private final PersonRepository personRepository;
 
     @Override
     public PersonResponse savePerson(PersonRequest personRequest) {

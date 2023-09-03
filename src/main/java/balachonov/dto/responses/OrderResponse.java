@@ -1,6 +1,5 @@
 package balachonov.dto.responses;
 
-import balachonov.entities.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

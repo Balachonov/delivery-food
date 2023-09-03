@@ -1,7 +1,9 @@
 package balachonov.controllers;
 
+import com.google.i18n.phonenumbers.NumberParseException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.MailException;
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
-import static balachonov.util.Constants.*;
+import static balachonov.util.Constants.ERR_VALID_MESSAGE;
+import static balachonov.util.Constants.LOG_ERR_EXCEPTION;
 import static java.lang.String.format;
 
 @Slf4j
@@ -35,14 +38,25 @@ public class ExceptionHandlerController {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage(), exception);
     }
 
+    @ExceptionHandler(NumberParseException.class)
+    public ResponseStatusException handleNumberParseException(NumberParseException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    }
+
+    @ExceptionHandler(UnsupportedOperationException.class)
+    public void handleUnsupportedOperationException(UnsupportedOperationException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
+    }
+
     @ExceptionHandler(MailException.class)
     public void handleMailException(MailException exception) {
         log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
     }
 
     private String getMessageForValidException(MethodArgumentNotValidException exception) {
-        String field = exception.getBindingResult().getFieldError().getField();
-        String defaultMessage = exception.getBindingResult().getFieldError().getDefaultMessage();
-        return format(ERR_VALID_MESSAGE, field, defaultMessage);
+        return format(ERR_VALID_MESSAGE,
+                StringUtils.defaultString(exception.getBindingResult().getFieldError().getField()),
+                StringUtils.defaultString(exception.getBindingResult().getFieldError().getDefaultMessage()));
     }
 }

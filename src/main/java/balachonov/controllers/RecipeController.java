@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RecipeController {
 
-    private final RecipeService RECIPE_SERVICE;
+    private final RecipeService recipeService;
 
     @GetMapping(value = "/recipe")
     public RecipeResponse getRecipe() {
-        return RECIPE_SERVICE.getRecipe();
+        return recipeService.getRecipe();
     }
 }

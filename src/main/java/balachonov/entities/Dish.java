@@ -30,7 +30,7 @@ public class Dish {
 
     @Column(name = NAME,
             nullable = false,
-            length = 50)
+            length = 100)
     private String name;
 
     @Column(name = PRICE,
@@ -46,7 +46,7 @@ public class Dish {
             nullable = false)
     private DishType type;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = BASKET_DISH,
             joinColumns = @JoinColumn(name = DISH_ID),
             inverseJoinColumns = @JoinColumn(name = BASKET_ID))

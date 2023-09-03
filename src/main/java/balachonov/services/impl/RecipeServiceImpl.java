@@ -12,10 +12,10 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
 
-    private final RecipeClient RECIPE_CLIENT;
+    private final RecipeClient recipeClient;
 
     @Override
     public RecipeResponse getRecipe() {
-        return RECIPE_CLIENT.getRecipe(LocalDate.now().getDayOfWeek());
+        return recipeClient.getRecipe(LocalDate.now().getDayOfWeek());
     }
 }

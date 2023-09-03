@@ -1,5 +1,6 @@
 package balachonov.controllers;
 
+import balachonov.aspects.anotations.ExecutionTimeLog;
 import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
 import balachonov.services.PersonService;
@@ -20,6 +21,7 @@ public class PersonController {
     private final PersonService personService;
 
     @PostMapping(value = "/person")
+    @ExecutionTimeLog
     public PersonResponse savePerson(@Valid @RequestBody PersonRequest personRequest) {
         return personService.savePerson(personRequest);
     }

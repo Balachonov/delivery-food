@@ -1,5 +1,6 @@
 package balachonov.dto.requests;
 
+import balachonov.validators.anotations.Phone;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,9 +19,11 @@ import java.util.List;
 public class PersonRequest {
 
     @NotBlank
+    @Size(max = 50)
     private String firstName;
 
     @NotBlank
+    @Size(max = 50)
     private String lastName;
 
     @NotBlank
@@ -28,6 +31,7 @@ public class PersonRequest {
     private String email;
 
     @NotBlank
+    @Phone
     private String telephone;
 
     @NotBlank

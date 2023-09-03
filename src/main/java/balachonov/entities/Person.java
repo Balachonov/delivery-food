@@ -31,12 +31,12 @@ public class Person {
 
     @Column(name = FIRST_NAME,
             nullable = false,
-            length = 20)
+            length = 50)
     private String firstName;
 
     @Column(name = LAST_NAME,
             nullable = false,
-            length = 20)
+            length = 50)
     private String lastName;
 
     @Column(name = EMAIL,
@@ -58,7 +58,8 @@ public class Person {
     private PersonRole role;
 
     @OneToMany(mappedBy = PERSON,
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Order> orders;
 }

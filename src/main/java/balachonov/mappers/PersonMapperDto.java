@@ -3,6 +3,7 @@ package balachonov.mappers;
 import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
 import balachonov.entities.Person;
+import balachonov.mappers.anotations.DoIgnore;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

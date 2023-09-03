@@ -1,6 +1,5 @@
 package balachonov.dto.requests;
 
-import balachonov.dto.responses.DishResponse;
 import balachonov.entities.Person;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

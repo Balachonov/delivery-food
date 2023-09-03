@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PasswordGenerationAndCheckImpl implements PasswordGenerationAndCheck {
+
     private final Argon2PasswordEncoder encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
 
     @Override

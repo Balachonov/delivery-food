@@ -1,42 +1,37 @@
 package balachonov.util;
 
-public final class Constants {
+import lombok.experimental.UtilityClass;
 
-    /**
-     * General constants
-     */
-    public static final String DELETED = "deleted";
-    public static final String DELETED_ZERO = "DELETED = 0";
-    public static final String SPRING = "spring";
+@UtilityClass
+public class Constants {
 
     /**
      * Constants for person
      */
     public static final String PERSONS = "persons";
     public static final String PERSON = "person";
-    public static final String PERSON_ID = "PERSON_ID";
+    public static final String PERSON_ID = "person_id";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
     public static final String TELEPHONE = "telephone";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
-    public static final String SALT = "salt";
     public static final String ROLE = "role";
 
     /**
      * Constants for basket
      */
     public static final String BASKETS = "baskets";
-    public static final String BASKET_ID = "BASKET_ID";
-    public static final String BASKET_DISH = "BASKET_DISH";
-    public static final String DESCRIPTION = "DESCRIPTION";
-    public static final String ORDER_TIME = "ORDER_TIME";
+    public static final String BASKET_ID = "basket_id";
+    public static final String BASKET_DISH = "basket_dish";
+    public static final String DESCRIPTION = "description";
+    public static final String ORDER_TIME = "order_time";
 
     /**
      * Constants for dish
      */
-    public static final String DISHES = "DISHES";
-    public static final String DISH_ID = "DISH_ID";
+    public static final String DISHES = "dishes";
+    public static final String DISH_ID = "dish_id";
     public static final String NAME = "name";
     public static final String PRICE = "price";
     public static final String TYPE = "type";
@@ -49,15 +44,17 @@ public final class Constants {
     public static final String PERSON_ORDERS = "person.orders";
     public static final String DISH_RESPONSES = "dishResponses";
     public static final String ORDER_RESPONSES = "orderResponses";
+    public static final String SPRING = "spring";
 
     /**
      * Constants for email sender
      */
-    public static final String MESSAGE_ORDER = "Your order has been accepted and is being prepared." +
+    public static final String MESSAGE_MAIL_ORDER = "Your order has been accepted and is being prepared." +
             " Thank you for choosing us";
-    public static final String SUBJECT_ORDER = "Your order in the EL'Grillgo has been confirmed";
-    public static final String SUBJECT_SUCCESSFUL_REGISTRATION = "Successful registration";
-    public static final String MESSAGE_SUCCESSFUL_REGISTRATION = "Я тебя люблю";
+    public static final String SUBJECT_MAIL_ORDER = "Your order in the EL'Grillgo has been confirmed";
+    public static final String MESSAGE_MAIL_REGISTRATION = "Registration was successful. Thank you for choosing " +
+            "our restaurant. We'll feed you.";
+    public static final String SUBJECT_MAIL_REGISTRATION = "Successful registration";
 
     /**
      * Constants for service exception
@@ -69,14 +66,22 @@ public final class Constants {
     public static final String DISH_NOT_FOUND_BY_NAME = "Dish with name - %s is not found";
     public static final String LOG_ERR_EXCEPTION = "EXCEPTION: {}";
     public static final String ERR_VALID_MESSAGE = "Field: %s. Error: %s";
-    public static final String ERR_PASSWORD_GENERATION_MESSAGE = "Oops. There are problems on the server. We are " +
-            "already solving them.";
 
     /**
-     * Constants for service HQL
+     * Constants for ControllerLoggerAspect
      */
-    public static final String PERSON_DELETE = "update Person person set person.deleted = 1 where person.id=:id";
+    public static final String REQUEST_LOGGER_PATTERN = """
+            ==> Request: {}. URI: {}. Methods: {}.
+            Request object: {}.""";
+    public static final String RESPONSE_LOGGER_PATTERN = """
+            <== Response: {}. URI: {}. Methods: {}.
+            Response object: {}""";
+    public static final String EXECUTION_TIME_LOGGER_PATTERN = "Methods: {}. Execution time: {} ms";
+    public static final String MAIL_SEND_LOGGER_PATTERN = "Methods: {}. Send mail to: {}";
 
-    private Constants() {
-    }
+    /**
+     * Constants for PhoneNumberConstraintValidator
+     */
+    public static final String CODE_BELARUS = "BY";
+    public static final String ERR_MESSAGE_PHONE_NUMBER = "Enter a Belarusian phone number starting with +375";
 }

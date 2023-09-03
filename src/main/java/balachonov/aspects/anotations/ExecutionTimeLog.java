@@ -1,14 +1,11 @@
-package balachonov.mappers;
-
-import org.mapstruct.Qualifier;
+package balachonov.aspects.anotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Qualifier
 @Target(ElementType.METHOD)
-@Retention(RetentionPolicy.CLASS)
-public @interface DoIgnore {
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ExecutionTimeLog {
 }
