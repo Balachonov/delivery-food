@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.Optional;
-
 import static balachonov.util.Constants.*;
+import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 @Slf4j
@@ -45,7 +44,7 @@ public class LoggerAspect {
                 request.getMethod(),
                 request.getRequestURI(),
                 joinPoint.getSignature().toShortString(),
-                Optional.ofNullable(response).orElse(EMPTY));
+                ofNullable(response).orElse(EMPTY));
     }
 
     @After("getEmailServicePointcut()")

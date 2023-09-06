@@ -16,6 +16,6 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeResponse getRecipe() {
-        return recipeClient.getRecipe(LocalDate.now().getDayOfWeek());
+        return recipeClient.getRecipe();
     }
 }
