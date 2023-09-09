@@ -4,8 +4,10 @@ import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
 import balachonov.entities.Person;
 import balachonov.enums.PersonRole;
+import balachonov.mappers.PersonArchiveMapperDto;
 import balachonov.mappers.PersonMapperDto;
 import balachonov.repositories.PersonRepository;
+import balachonov.services.PersonArchiveService;
 import balachonov.services.EmailService;
 import balachonov.services.PasswordGenerationAndCheck;
 import balachonov.services.PersonService;
@@ -24,32 +26,34 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    private final PersonMapperDto personMapper;
+    private final PersonMapperDto personMapperDto;
+    private final PersonArchiveMapperDto personArchiveMapperDto;
     private final EmailService emailService;
+    private final PersonArchiveService archiveService;
     private final PasswordGenerationAndCheck passwordService;
     private final PersonRepository personRepository;
 
     @Override
     public PersonResponse savePerson(PersonRequest personRequest) {
-        Person person = personMapper.mapToPerson(personRequest);
+        Person person = personMapperDto.mapToPerson(personRequest);
         person.setPassword(passwordService.getHashPassword(personRequest.getPassword()))
                 .setRole(PersonRole.USER);
         emailService.sendSuccessfulRegistrationMail(person.getEmail());
         person = personRepository.save(person);
-        return personMapper.mapToPersonResponse(person);
+        return personMapperDto.mapToFullPersonResponse(person);
     }
 
     @Override
     public PersonResponse getPersonById(UUID id) {
         return personRepository.findById(id)
-                .map(personMapper::mapToPersonResponse)
+                .map(personMapperDto::mapToFullPersonResponse)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_ID, id)));
     }
 
     @Override
     public PersonResponse getPersonByEmail(String email) {
         return personRepository.findByEmail(email)
-                .map(personMapper::mapToPersonResponse)
+                .map(personMapperDto::mapToFullPersonResponse)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_EMAIL, email)));
     }
 
@@ -57,13 +61,15 @@ public class PersonServiceImpl implements PersonService {
     public PersonResponse updatePerson(PersonRequest personRequest, UUID id) {
         Person person = personRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(format(PERSON_NOT_FOUND_BY_ID, id)));
-        personMapper.updatePerson(personRequest, person);
+        personMapperDto.updatePerson(personRequest, person);
         person = personRepository.save(person);
-        return personMapper.mapToPersonResponse(person);
+        return personMapperDto.mapToFullPersonResponse(person);
     }
 
     @Override
     public void deletePerson(UUID id) {
+        PersonResponse personResponse = getPersonById(id);
+        archiveService.toArchive(personArchiveMapperDto.mapToPersonArchive(personResponse));
         personRepository.deleteById(id);
     }
 
@@ -71,7 +77,7 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonResponse> getPersons() {
         return personRepository.findAll()
                 .stream()
-                .map(personMapper::mapToPersonResponse)
+                .map(personMapperDto::mapToFullPersonResponse)
                 .toList();
     }
 }

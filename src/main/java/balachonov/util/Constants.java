@@ -26,6 +26,7 @@ public class Constants {
     public static final String BASKET_DISH = "basket_dish";
     public static final String DESCRIPTION = "description";
     public static final String ORDER_TIME = "order_time";
+    public static final String OWNER = "owner";
 
     /**
      * Constants for dish
@@ -44,7 +45,6 @@ public class Constants {
     public static final String PERSON_ORDERS = "person.orders";
     public static final String DISH_RESPONSES = "dishResponses";
     public static final String ORDER_RESPONSES = "orderResponses";
-    public static final String SPRING = "spring";
 
     /**
      * Constants for email sender

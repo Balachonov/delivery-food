@@ -1,6 +1,5 @@
 package balachonov.services.impl;
 
-import balachonov.aspects.anotations.ExecutionTimeLog;
 import balachonov.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;

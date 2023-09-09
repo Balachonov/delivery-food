@@ -10,6 +10,7 @@ import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 
 import static balachonov.util.Constants.*;
+import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 @Component
@@ -23,13 +24,9 @@ public interface PersonMapperDto {
     @Mapping(source = PERSON_ORDERS, target = ORDER_RESPONSES)
     PersonResponse mapToPersonResponse(Person person);
 
-    PersonResponse mapToPersonResponse(PersonRequest personRequest);
-
     @DoIgnore
     @Mapping(source = PERSON_ORDERS, target = ORDER_RESPONSES)
     PersonResponse mapToFullPersonResponse(Person person);
-
-    Person mapToPerson(PersonResponse personResponse);
 
     Person mapToPerson(PersonRequest personRequest);
 
