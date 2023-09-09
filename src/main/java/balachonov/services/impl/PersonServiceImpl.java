@@ -7,12 +7,13 @@ import balachonov.enums.PersonRole;
 import balachonov.mappers.PersonArchiveMapperDto;
 import balachonov.mappers.PersonMapperDto;
 import balachonov.repositories.PersonRepository;
-import balachonov.services.PersonArchiveService;
 import balachonov.services.EmailService;
 import balachonov.services.PasswordGenerationAndCheck;
+import balachonov.services.PersonArchiveService;
 import balachonov.services.PersonService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,10 +75,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<PersonResponse> getPersons() {
-        return personRepository.findAll()
+    public Page<PersonResponse> getPersons(int pageNumber, int pageSize, String sort) {
+        Pageable pageable = sort != null ? PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, sort)
+                : PageRequest.of(pageNumber, pageSize);
+        List<PersonResponse> personsResponse = personRepository.findAll()
                 .stream()
-                .map(personMapperDto::mapToFullPersonResponse)
+                .map(personMapperDto::mapToPersonResponse)
                 .toList();
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), personsResponse.size());
+        List<PersonResponse> pageContent = personsResponse.subList(start, end);
+        return new PageImpl<>(pageContent, pageable, personsResponse.size());
     }
 }

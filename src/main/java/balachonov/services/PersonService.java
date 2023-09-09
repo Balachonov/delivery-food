@@ -2,8 +2,8 @@ package balachonov.services;
 
 import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -19,5 +19,5 @@ public interface PersonService {
 
     void deletePerson(UUID id);
 
-    List<PersonResponse> getPersons();
+    Page<PersonResponse> getPersons(int PageNumber, int PageSize, String sort);
 }

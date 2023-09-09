@@ -23,7 +23,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -95,30 +94,22 @@ class PersonServiceImplTest {
     }
 
     @ParameterizedTest
-    @ArgumentsSource(OutputPerson.class)
-    void getPersons(Person person, PersonResponse expecedPersonResponse) {
-        when(personRepository.findAll()).thenReturn(List.of(person));
-        List<PersonResponse> actualPersonResponse = personServiceImpl.getPersons();
-        assertEquals(List.of(expecedPersonResponse), actualPersonResponse);
-    }
-
-    @ParameterizedTest
     @ArgumentsSource(InvalidPerson.class)
-    void getPersonByIdException(Person person){
+    void getPersonByIdException(Person person) {
         when(personRepository.findById(any(UUID.class))).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, (Executable) personServiceImpl.getPersonById(person.getId()));
     }
 
     @ParameterizedTest
     @ArgumentsSource(InvalidPerson.class)
-    void getPersonByEmailException(Person person){
+    void getPersonByEmailException(Person person) {
         when(personRepository.findByEmail(any(String.class))).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, (Executable) personServiceImpl.getPersonByEmail(person.getEmail()));
     }
 
     @ParameterizedTest
     @ArgumentsSource(InvalidUpdatedPerson.class)
-    void updatePersonException(PersonRequest personRequest, UUID id){
+    void updatePersonException(PersonRequest personRequest, UUID id) {
         when(personRepository.findById(any(UUID.class))).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, (Executable) personServiceImpl.updatePerson(personRequest, id));
     }

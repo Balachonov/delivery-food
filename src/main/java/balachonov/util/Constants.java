@@ -66,6 +66,7 @@ public class Constants {
     public static final String DISH_NOT_FOUND_BY_NAME = "Dish with name - %s is not found";
     public static final String LOG_ERR_EXCEPTION = "EXCEPTION: {}";
     public static final String ERR_VALID_MESSAGE = "Field: %s. Error: %s";
+    public static final String ERR_PAGE_NOT_FOUND = "Page not found";
 
     /**
      * Constants for ControllerLoggerAspect

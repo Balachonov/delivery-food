@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
-import static balachonov.util.Constants.ERR_VALID_MESSAGE;
-import static balachonov.util.Constants.LOG_ERR_EXCEPTION;
+import static balachonov.util.Constants.*;
 import static java.lang.String.format;
 
 @Slf4j
@@ -42,6 +41,12 @@ public class ExceptionHandlerController {
     public ResponseStatusException handleNumberParseException(NumberParseException exception) {
         log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage(), exception);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseStatusException handleIllegalArgumentException(IllegalArgumentException exception) {
+        log.warn(LOG_ERR_EXCEPTION, exception.getMessage());
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, ERR_PAGE_NOT_FOUND, exception);
     }
 
     @ExceptionHandler(UnsupportedOperationException.class)
