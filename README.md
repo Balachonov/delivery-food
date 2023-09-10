@@ -17,12 +17,12 @@
 ## About The Project
 
 This food delivery app is a convenient and fast way to order food from your favorite El'Grillgo restaurant directly to your home or office. With our app you can easily and quickly select dishes from the restaurant menu, add them to the cart and place an order.
-To clarify the details of the order, our manager will contact you at the specified phone number. We guarantee high quality food and service so you can enjoy delicious food anytime and anywhere.
+To clarify the details of the order, our manager will contact you on the specified phone number. We guarantee high quality food and service so you can enjoy delicious food anytime and anywhere.
 
 You can also contact us by email (el.grilgo@gmail.com) or write to our best developer (balachonov@gmail.com)
 
 
-The project was gradually developed over four montns of training:
+The project was gradually developed during four montns of training:
 * First month - Web Servlet application, Prepared statements in data base
 * Second month - Hibernate, Hibernate Query Language, Criteria API
 * Third month - gradual transition to Spring
@@ -75,10 +75,10 @@ The project was developed using:
 
 ## Demonstration of some project possibilities
 
-An mail will be sent to your email address when you sign in or order.  
+A confirmation email will be sent to your email address when you sign in or order.  
 ![Example mail](/src/images/mail.png)
 
-Page reduction implemented.
+Pagination and sorting by your parameter implemented.
 
 ```java
 @GetMapping(value = "/persons/{pageNumber}/{pageSize}/{sort}")
@@ -90,7 +90,7 @@ Page reduction implemented.
     }
 ```
 
-Through logging of controllers implemented.
+AOP logging of controllers implemented.
 ```java
 @Pointcut("execution(* balachonov.controllers..*(..)) " +
             "&& !@annotation(balachonov.aspects.anotations.SkipLog)")
@@ -108,7 +108,7 @@ Through logging of controllers implemented.
     }
 ```
 
-Validation of phone numbers by annotation.
+Validation of phone numbers by means of annotation.
 ```java
 public class PhoneNumberConstraintValidator implements ConstraintValidator<Phone, String> {
 
