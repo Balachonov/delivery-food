@@ -8,5 +8,10 @@ import java.util.UUID;
 
 public interface DishRepository extends JpaRepository<Dish, UUID> {
 
-    Optional<Dish> findByName(String mail);
+    /**
+     * Searching Dich in database by name
+     * @return Dish
+     */
+
+    Optional<Dish> findByName(String name);
 }

@@ -13,5 +13,10 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
         nullValuePropertyMappingStrategy = IGNORE)
 public interface PersonArchiveMapperDto {
 
+    /**
+     * Mapping PersonResponse to PersonArchiveResponse for {@link balachonov.feingClients.PersonArchiveClient}
+     * @return PersonArchiveResponse
+     */
+
     PersonArchiveResponse mapToPersonArchive(PersonResponse personResponse);
 }

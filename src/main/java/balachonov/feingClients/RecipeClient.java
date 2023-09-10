@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(name = "recipe-day")
 public interface RecipeClient {
+
+    /**
+     * Getting a day recipe from a remote API
+     */
     @GetMapping
     RecipeResponse getRecipe();
 }

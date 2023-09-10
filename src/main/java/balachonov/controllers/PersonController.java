@@ -1,6 +1,7 @@
 package balachonov.controllers;
 
 import balachonov.aspects.anotations.ExecutionTimeLog;
+import balachonov.aspects.anotations.SkipLog;
 import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
 import balachonov.services.PersonService;
@@ -23,6 +24,7 @@ public class PersonController {
 
     @PostMapping(value = "/person")
     @ExecutionTimeLog
+    @SkipLog
     public PersonResponse savePerson(@Valid @RequestBody PersonRequest personRequest) {
         return personService.savePerson(personRequest);
     }
@@ -59,7 +61,7 @@ public class PersonController {
     public List<PersonResponse> getPersons(@PathVariable Integer pageNumber,
                                            @PathVariable Integer pageSize,
                                            @PathVariable String sort) {
-        Page<PersonResponse > data = personService.getPersons(pageNumber, pageSize, sort) ;
+        Page<PersonResponse> data = personService.getPersons(pageNumber, pageSize, sort) ;
         return data.getContent();
     }
 }

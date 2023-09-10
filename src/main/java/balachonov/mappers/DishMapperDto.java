@@ -16,10 +16,24 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
         nullValuePropertyMappingStrategy = IGNORE)
 public interface DishMapperDto {
 
+    /**
+     * Mapping Dish entity to DishResponse
+     * @return DishResponse
+     */
+
     @Mapping(source = DISH_ORDERS, target = ORDER_RESPONSES)
     DishResponse mapToDishResponse(Dish dish);
 
+    /**
+     * Mapping DishRequest to Dish entity
+     * @return Dish
+     */
+
     Dish mapToDish(DishRequest dishRequest);
+
+    /**
+     * Updating Dish entity
+     */
 
     void updateDish(DishRequest dishRequest, @MappingTarget Dish dish);
 }
