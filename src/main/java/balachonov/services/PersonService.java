@@ -2,8 +2,9 @@ package balachonov.services;
 
 import balachonov.dto.requests.PersonRequest;
 import balachonov.dto.responses.PersonResponse;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -11,6 +12,7 @@ public interface PersonService {
 
     /**
      * Saving Person
+     *
      * @return PersonResponse
      */
 
@@ -18,6 +20,7 @@ public interface PersonService {
 
     /**
      * Getting Person by ID
+     *
      * @return PersonResponse
      */
 
@@ -25,6 +28,7 @@ public interface PersonService {
 
     /**
      * Getting Person by email
+     *
      * @return PersonResponse
      */
 
@@ -32,6 +36,7 @@ public interface PersonService {
 
     /**
      * Updating Person
+     *
      * @return PersonResponse
      */
 
@@ -45,8 +50,9 @@ public interface PersonService {
 
     /**
      * Creating a page with a list of Person and sorting
+     *
      * @return Page of PersonResponse
      */
 
-    Page<PersonResponse> getPersons(int pageNumber, int pageSize, String sort);
+    List<PersonResponse> getPersons(Pageable pageable);
 }

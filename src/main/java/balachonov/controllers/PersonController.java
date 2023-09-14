@@ -7,7 +7,7 @@ import balachonov.dto.responses.PersonResponse;
 import balachonov.services.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,18 +50,8 @@ public class PersonController {
         personService.deletePerson(id);
     }
 
-    @GetMapping(value = "/persons/{pageNumber}/{pageSize}")
-    public List<PersonResponse> getPersons(@PathVariable Integer pageNumber,
-                                           @PathVariable Integer pageSize) {
-        Page<PersonResponse > data = personService.getPersons(pageNumber, pageSize, null) ;
-        return data.getContent();
-    }
-
-    @GetMapping(value = "/persons/{pageNumber}/{pageSize}/{sort}")
-    public List<PersonResponse> getPersons(@PathVariable Integer pageNumber,
-                                           @PathVariable Integer pageSize,
-                                           @PathVariable String sort) {
-        Page<PersonResponse> data = personService.getPersons(pageNumber, pageSize, sort) ;
-        return data.getContent();
+    @GetMapping(value = "/persons")
+    public List<PersonResponse> getPersons(Pageable pageable) {
+        return personService.getPersons(pageable);
     }
 }

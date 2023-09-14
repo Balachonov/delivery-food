@@ -75,16 +75,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Page<PersonResponse> getPersons(int pageNumber, int pageSize, String sort) {
-        Pageable pageable = sort != null ? PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, sort)
-                : PageRequest.of(pageNumber, pageSize);
-        List<PersonResponse> personsResponse = personRepository.findAll()
+    public List<PersonResponse> getPersons(Pageable pageable) {
+        return personRepository.findAll(pageable)
                 .stream()
                 .map(personMapperDto::mapToPersonResponse)
                 .toList();
-        int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), personsResponse.size());
-        List<PersonResponse> pageContent = personsResponse.subList(start, end);
-        return new PageImpl<>(pageContent, pageable, personsResponse.size());
     }
 }
