@@ -72,6 +72,7 @@ The project was developed using:
 2. Cloud settings of the main application - <a href="https://github.com/Balachonov/cloud-config-delivery-food">Settings service</a>
 3. Generating and sending day recipe - <a href="https://github.com/Balachonov/recipe-day">Recipe service</a>
 4. Accessing and saving remote users in a separate database - <a href="https://github.com/Balachonov/archive-server">Archive service</a>
+5. Sending emails upon successful registration and ordering - <a href="https://github.com/Balachonov/mail-sender">Mail service</a>
 
 ## Demonstration of some project possibilities
 
@@ -81,12 +82,9 @@ A confirmation email will be sent to your email address when you sign in or orde
 Pagination and sorting by your parameter implemented.
 
 ```java
-@GetMapping(value = "/persons/{pageNumber}/{pageSize}/{sort}")
-    public List<PersonResponse> getPersons(@PathVariable Integer pageNumber,
-                                           @PathVariable Integer pageSize,
-                                           @PathVariable String sort) {
-        Page<PersonResponse> data = personService.getPersons(pageNumber, pageSize, sort) ;
-        return data.getContent();
+@GetMapping(value = "/persons")
+    public List<PersonResponse> getPersons(Pageable pageable) {
+        return personService.getPersons(pageable);
     }
 ```
 
