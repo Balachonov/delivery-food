@@ -1,6 +1,7 @@
 package balachonov.services.impl;
 
 import balachonov.dto.requests.PersonRequest;
+import balachonov.dto.responses.MailInfo;
 import balachonov.dto.responses.PersonResponse;
 import balachonov.entities.Person;
 import balachonov.enums.PersonRole;
@@ -39,8 +40,8 @@ public class PersonServiceImpl implements PersonService {
         Person person = personMapperDto.mapToPerson(personRequest);
         person.setPassword(passwordService.getHashPassword(personRequest.getPassword()))
                 .setRole(PersonRole.USER);
-        emailService.sendSuccessfulRegistrationMail(person.getEmail());
         person = personRepository.save(person);
+        emailService.sendSuccessfulRegistrationMail(new MailInfo(person.getEmail()));
         return personMapperDto.mapToFullPersonResponse(person);
     }
 

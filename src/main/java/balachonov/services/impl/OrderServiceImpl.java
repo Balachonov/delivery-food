@@ -1,6 +1,7 @@
 package balachonov.services.impl;
 
 import balachonov.dto.requests.OrderRequest;
+import balachonov.dto.responses.MailInfo;
 import balachonov.dto.responses.OrderResponse;
 import balachonov.entities.Order;
 import balachonov.mappers.OrderMapperDto;
@@ -29,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderResponse saveOrder(OrderRequest orderRequest) {
         Order order = orderMapper.mapToOrder(orderRequest);
-        emailService.sendSuccessfulOrderMail(order.getPerson().getEmail());
+        emailService.sendSuccessfulOrderMail(new MailInfo(orderRequest.getOwner().getEmail()));
         order = orderRepository.save(order);
         return orderMapper.mapToOrderResponse(order);
     }

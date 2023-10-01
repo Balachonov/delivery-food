@@ -1,16 +1,18 @@
 package balachonov.services;
 
+import balachonov.dto.responses.MailInfo;
+
 public interface EmailService {
 
     /**
      * Sending a mail if order successfully
      */
 
-    void sendSuccessfulOrderMail(String email);
+    void sendSuccessfulOrderMail(MailInfo mailInfo);
 
     /**
      * Sending a mail if successful registration
      */
 
-    void sendSuccessfulRegistrationMail(String email);
+    void sendSuccessfulRegistrationMail(MailInfo mailInfo);
 }

@@ -47,16 +47,6 @@ public class Constants {
     public static final String ORDER_RESPONSES = "orderResponses";
 
     /**
-     * Constants for email sender
-     */
-    public static final String MESSAGE_MAIL_ORDER = "Your order has been accepted and is being prepared." +
-            " Thank you for choosing us";
-    public static final String SUBJECT_MAIL_ORDER = "Your order in the EL'Grillgo has been confirmed";
-    public static final String MESSAGE_MAIL_REGISTRATION = "Registration was successful. Thank you for choosing " +
-            "our restaurant. We'll feed you.";
-    public static final String SUBJECT_MAIL_REGISTRATION = "Successful registration";
-
-    /**
      * Constants for service exception
      */
     public static final String PERSON_NOT_FOUND_BY_ID = "Person with id - %s is not found";
